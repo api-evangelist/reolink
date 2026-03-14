@@ -1,0 +1,15 @@
+name: Reolink
+description: >-
+  APIs for Reolink, a provider of security cameras and smart home
+  surveillance technology.
+url: https://reolink.com
+created: "2025-01-01"
+modified: "2025-01-01"
+specificationVersion: "0.18"
+tags:
+- Reolink
+- Security Cameras
+- IoT
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com

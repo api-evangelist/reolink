@@ -1,0 +1,36 @@
+{
+  "$id": "command-response.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reolink Command Response",
+  "description": "Standard response structure returned by all Reolink Camera HTTP API commands.",
+  "type": "object",
+  "properties": {
+    "cmd": {
+      "type": "string",
+      "description": "The command that was executed"
+    },
+    "code": {
+      "type": "integer",
+      "description": "Response code where 0 indicates success"
+    },
+    "value": {
+      "type": "object",
+      "description": "Command-specific response data"
+    },
+    "error": {
+      "type": "object",
+      "description": "Error information when the command fails",
+      "properties": {
+        "rspCode": {
+          "type": "integer",
+          "description": "Error response code"
+        },
+        "detail": {
+          "type": "string",
+          "description": "Human-readable error detail message"
+        }
+      }
+    }
+  },
+  "required": ["cmd", "code"]
+}

@@ -1,0 +1,76 @@
+{
+  "$id": "alarm-settings.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reolink Alarm Settings",
+  "description": "Motion detection and AI alarm configuration including sensitivity, detection zones, and schedule parameters.",
+  "type": "object",
+  "properties": {
+    "channel": {
+      "type": "integer",
+      "description": "Camera channel number",
+      "minimum": 0
+    },
+    "type": {
+      "type": "string",
+      "description": "Alarm type",
+      "enum": ["md", "people", "vehicle", "dog_cat", "audio"]
+    },
+    "enable": {
+      "type": "integer",
+      "description": "Enable or disable the alarm (0 = disabled, 1 = enabled)",
+      "enum": [0, 1]
+    },
+    "sens": {
+      "type": "array",
+      "description": "Sensitivity settings for detection zones",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Zone identifier"
+          },
+          "sensitivity": {
+            "type": "integer",
+            "description": "Sensitivity level (0-50)",
+            "minimum": 0,
+            "maximum": 50
+          }
+        }
+      }
+    },
+    "area": {
+      "type": "object",
+      "description": "Detection area definition as a grid of cells",
+      "properties": {
+        "row": {
+          "type": "integer",
+          "description": "Number of rows in detection grid"
+        },
+        "col": {
+          "type": "integer",
+          "description": "Number of columns in detection grid"
+        },
+        "table": {
+          "type": "string",
+          "description": "Bitmask string defining active detection cells"
+        }
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "description": "Weekly schedule for alarm activation",
+      "properties": {
+        "enable": {
+          "type": "integer",
+          "enum": [0, 1]
+        },
+        "table": {
+          "type": "string",
+          "description": "Weekly schedule encoded as a bitmask string"
+        }
+      }
+    }
+  },
+  "required": ["channel"]
+}

@@ -1,0 +1,76 @@
+{
+  "$id": "recording-search.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reolink Recording Search",
+  "description": "Search parameters and results for querying recorded video files by date, time range, channel, and stream type.",
+  "type": "object",
+  "properties": {
+    "channel": {
+      "type": "integer",
+      "description": "Camera channel number to search",
+      "minimum": 0
+    },
+    "onlyStatus": {
+      "type": "integer",
+      "description": "0 for full results with file details, 1 for recording status bitmask only",
+      "enum": [0, 1]
+    },
+    "streamType": {
+      "type": "string",
+      "description": "Stream type to search",
+      "enum": ["main", "sub"]
+    },
+    "StartTime": {
+      "$ref": "#/$defs/TimeStamp",
+      "description": "Search range start time"
+    },
+    "EndTime": {
+      "$ref": "#/$defs/TimeStamp",
+      "description": "Search range end time"
+    }
+  },
+  "required": ["channel", "onlyStatus", "streamType", "StartTime", "EndTime"],
+  "$defs": {
+    "TimeStamp": {
+      "type": "object",
+      "description": "Date and time components",
+      "properties": {
+        "year": {
+          "type": "integer",
+          "description": "Year (e.g., 2026)"
+        },
+        "mon": {
+          "type": "integer",
+          "description": "Month (1-12)",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "day": {
+          "type": "integer",
+          "description": "Day of month (1-31)",
+          "minimum": 1,
+          "maximum": 31
+        },
+        "hour": {
+          "type": "integer",
+          "description": "Hour (0-23)",
+          "minimum": 0,
+          "maximum": 23
+        },
+        "min": {
+          "type": "integer",
+          "description": "Minute (0-59)",
+          "minimum": 0,
+          "maximum": 59
+        },
+        "sec": {
+          "type": "integer",
+          "description": "Second (0-59)",
+          "minimum": 0,
+          "maximum": 59
+        }
+      },
+      "required": ["year", "mon", "day", "hour", "min", "sec"]
+    }
+  }
+}

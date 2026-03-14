@@ -1,0 +1,78 @@
+{
+  "$id": "login.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reolink Login",
+  "description": "Authentication request and response structures for the Login command, which returns a session token for subsequent API calls.",
+  "type": "object",
+  "properties": {
+    "request": {
+      "type": "object",
+      "description": "Login request payload",
+      "properties": {
+        "cmd": {
+          "type": "string",
+          "const": "Login"
+        },
+        "action": {
+          "type": "integer",
+          "const": 0
+        },
+        "param": {
+          "type": "object",
+          "properties": {
+            "User": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "description": "Account username"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "Account password"
+                }
+              },
+              "required": ["userName", "password"]
+            }
+          },
+          "required": ["User"]
+        }
+      },
+      "required": ["cmd", "action", "param"]
+    },
+    "response": {
+      "type": "object",
+      "description": "Login response containing the session token",
+      "properties": {
+        "cmd": {
+          "type": "string",
+          "const": "Login"
+        },
+        "code": {
+          "type": "integer"
+        },
+        "value": {
+          "type": "object",
+          "properties": {
+            "Token": {
+              "type": "object",
+              "properties": {
+                "leaseTime": {
+                  "type": "integer",
+                  "description": "Token validity period in seconds"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Authentication token to use in subsequent requests"
+                }
+              },
+              "required": ["leaseTime", "name"]
+            }
+          },
+          "required": ["Token"]
+        }
+      },
+      "required": ["cmd", "code", "value"]
+    }
+  }
+}

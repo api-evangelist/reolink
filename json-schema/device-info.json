@@ -1,0 +1,82 @@
+{
+  "$id": "device-info.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reolink Device Info",
+  "description": "Device information returned by the GetDevInfo command including model, firmware, hardware version, and capabilities.",
+  "type": "object",
+  "properties": {
+    "B485": {
+      "type": "integer",
+      "description": "RS485 support flag"
+    },
+    "IOInputNum": {
+      "type": "integer",
+      "description": "Number of IO input ports"
+    },
+    "IOOutputNum": {
+      "type": "integer",
+      "description": "Number of IO output ports"
+    },
+    "audioNum": {
+      "type": "integer",
+      "description": "Number of audio channels"
+    },
+    "buildDay": {
+      "type": "string",
+      "description": "Firmware build date"
+    },
+    "cfgVer": {
+      "type": "string",
+      "description": "Configuration version"
+    },
+    "channelNum": {
+      "type": "integer",
+      "description": "Number of camera channels"
+    },
+    "detail": {
+      "type": "string",
+      "description": "Device detail string"
+    },
+    "diskNum": {
+      "type": "integer",
+      "description": "Number of disk slots"
+    },
+    "firmVer": {
+      "type": "string",
+      "description": "Firmware version string"
+    },
+    "frameworkVer": {
+      "type": "integer",
+      "description": "Framework version number"
+    },
+    "hardVer": {
+      "type": "string",
+      "description": "Hardware version string"
+    },
+    "model": {
+      "type": "string",
+      "description": "Device model name"
+    },
+    "name": {
+      "type": "string",
+      "description": "Device display name"
+    },
+    "pakSuffix": {
+      "type": "string",
+      "description": "Firmware package suffix"
+    },
+    "serial": {
+      "type": "string",
+      "description": "Device serial number"
+    },
+    "type": {
+      "type": "string",
+      "description": "Device type identifier"
+    },
+    "wifi": {
+      "type": "integer",
+      "description": "WiFi support flag (0 or 1)"
+    }
+  },
+  "required": ["model", "firmVer", "hardVer", "name", "serial", "type", "channelNum"]
+}

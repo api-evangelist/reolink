@@ -1,0 +1,106 @@
+{
+  "$id": "network-settings.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reolink Network Settings",
+  "description": "Network configuration settings including local link, ports, WiFi, DDNS, NTP, and service endpoints.",
+  "type": "object",
+  "properties": {
+    "LocalLink": {
+      "type": "object",
+      "description": "Local network link configuration",
+      "properties": {
+        "dns": {
+          "type": "object",
+          "properties": {
+            "auto": {
+              "type": "integer",
+              "description": "Automatic DNS (0 = manual, 1 = auto)"
+            },
+            "dns1": {
+              "type": "string",
+              "description": "Primary DNS server address"
+            },
+            "dns2": {
+              "type": "string",
+              "description": "Secondary DNS server address"
+            }
+          }
+        },
+        "mac": {
+          "type": "string",
+          "description": "MAC address of the network interface"
+        },
+        "static": {
+          "type": "object",
+          "properties": {
+            "gateway": {
+              "type": "string",
+              "description": "Default gateway address"
+            },
+            "ip": {
+              "type": "string",
+              "description": "Static IP address"
+            },
+            "mask": {
+              "type": "string",
+              "description": "Subnet mask"
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Link type (DHCP or Static)",
+          "enum": ["DHCP", "Static"]
+        }
+      }
+    },
+    "NetPort": {
+      "type": "object",
+      "description": "Network port configuration",
+      "properties": {
+        "httpPort": {
+          "type": "integer",
+          "description": "HTTP service port (default 80)"
+        },
+        "httpsPort": {
+          "type": "integer",
+          "description": "HTTPS service port (default 443)"
+        },
+        "mediaPort": {
+          "type": "integer",
+          "description": "Media streaming port (default 9000)"
+        },
+        "onvifPort": {
+          "type": "integer",
+          "description": "ONVIF service port (default 8000)"
+        },
+        "rtmpPort": {
+          "type": "integer",
+          "description": "RTMP streaming port (default 1935)"
+        },
+        "rtspPort": {
+          "type": "integer",
+          "description": "RTSP streaming port (default 554)"
+        }
+      }
+    },
+    "Wifi": {
+      "type": "object",
+      "description": "WiFi connection configuration",
+      "properties": {
+        "ssid": {
+          "type": "string",
+          "description": "WiFi network name"
+        },
+        "password": {
+          "type": "string",
+          "description": "WiFi password"
+        },
+        "security": {
+          "type": "string",
+          "description": "Security protocol (e.g., WPA2-PSK)"
+        }
+      }
+    }
+  }
+}

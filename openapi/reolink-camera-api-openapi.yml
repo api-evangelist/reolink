@@ -1,0 +1,1828 @@
+openapi: 3.0.3
+info:
+  title: Reolink Camera HTTP API
+  description: >-
+    The Reolink Camera HTTP API provides a RESTful interface for controlling and
+    configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST
+    requests to the /cgi-bin/api.cgi endpoint with JSON payloads. The API supports
+    authentication via token-based sessions, device information retrieval, network
+    configuration, video and image settings, encoding parameters, recording
+    management, PTZ (pan-tilt-zoom) control, alarm and motion detection
+    configuration, IR and LED light control, AI-powered object detection, and
+    live streaming URL generation. Authentication is performed by first calling
+    the Login command to obtain a session token, which is then passed as a query
+    parameter on subsequent requests.
+  version: '8.0'
+  contact:
+    name: Reolink
+    url: https://reolink.com
+  license:
+    name: Proprietary
+    url: https://reolink.com
+servers:
+  - url: https://{camera_ip}
+    description: Reolink Camera or NVR
+    variables:
+      camera_ip:
+        default: 192.168.1.100
+        description: IP address of the Reolink camera or NVR
+paths:
+  /cgi-bin/api.cgi:
+    post:
+      operationId: login
+      summary: Authenticate and obtain session token
+      description: >-
+        Authenticates a user with the camera and returns a session token
+        for use in subsequent API requests.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginResponse'
+  /cgi-bin/api.cgi?cmd=Logout&token={token}:
+    post:
+      operationId: logout
+      summary: End session and invalidate token
+      description: Logs out the current session and invalidates the authentication token.
+      tags:
+        - Authentication
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Successful logout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetDevInfo&token={token}:
+    post:
+      operationId: getDevInfo
+      summary: Get device information
+      description: >-
+        Retrieves device information including model, hardware version,
+        firmware version, device name, and channel count.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Device information retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevInfoResponse'
+  /cgi-bin/api.cgi?cmd=GetAbility&token={token}:
+    post:
+      operationId: getAbility
+      summary: Get user abilities and permissions
+      description: Retrieves the abilities and permissions available to the authenticated user.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: User abilities retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetTime&token={token}:
+    post:
+      operationId: getTime
+      summary: Get device time
+      description: Retrieves the current date and time settings of the device.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Time settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetTime&token={token}:
+    post:
+      operationId: setTime
+      summary: Set device time
+      description: Configures the date and time settings of the device.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Time settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetHddInfo&token={token}:
+    post:
+      operationId: getHddInfo
+      summary: Get storage information
+      description: Retrieves hard disk drive information including capacity and status.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: HDD information retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=FormatHdd&token={token}:
+    post:
+      operationId: formatHdd
+      summary: Format storage drive
+      description: Formats the hard disk drive on the device, erasing all recordings.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: HDD formatted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=Reboot&token={token}:
+    post:
+      operationId: reboot
+      summary: Reboot the device
+      description: Reboots the camera or NVR device.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Device rebooting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetDevName&token={token}:
+    post:
+      operationId: getDevName
+      summary: Get device name
+      description: Retrieves the configured name of the device.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Device name retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetDevName&token={token}:
+    post:
+      operationId: setDevName
+      summary: Set device name
+      description: Configures the name of the device.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Device name updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAutoMaint&token={token}:
+    post:
+      operationId: getAutoMaint
+      summary: Get automatic maintenance settings
+      description: Retrieves automatic maintenance and reboot scheduling settings.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Auto maintenance settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAutoUpgrade&token={token}:
+    post:
+      operationId: getAutoUpgrade
+      summary: Get auto upgrade settings
+      description: Retrieves automatic firmware upgrade configuration.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Auto upgrade settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetChannelStatus&token={token}:
+    post:
+      operationId: getChannelStatus
+      summary: Get channel status
+      description: Retrieves the status of all camera channels including online/offline state.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Channel status retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetUser&token={token}:
+    post:
+      operationId: getUser
+      summary: Get user information
+      description: Retrieves user account information and management settings.
+      tags:
+        - Security
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: User information retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetOnline&token={token}:
+    post:
+      operationId: getOnline
+      summary: Get online users
+      description: Retrieves the list of currently connected users.
+      tags:
+        - Security
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Online users retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetNetPort&token={token}:
+    post:
+      operationId: getNetPort
+      summary: Get network port configuration
+      description: Retrieves network port settings including HTTP, HTTPS, RTSP, and ONVIF ports.
+      tags:
+        - Network
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Network port settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetNetPort&token={token}:
+    post:
+      operationId: setNetPort
+      summary: Set network port configuration
+      description: Configures network port settings.
+      tags:
+        - Network
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Network port settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetLocalLink&token={token}:
+    post:
+      operationId: getLocalLink
+      summary: Get local network link settings
+      description: Retrieves local network link configuration including IP address and DNS.
+      tags:
+        - Network
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Local link settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetWifi&token={token}:
+    post:
+      operationId: getWifi
+      summary: Get WiFi configuration
+      description: Retrieves wireless network configuration settings.
+      tags:
+        - Network
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: WiFi settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetDdns&token={token}:
+    post:
+      operationId: getDdns
+      summary: Get DDNS settings
+      description: Retrieves Dynamic DNS configuration.
+      tags:
+        - Network
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: DDNS settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetNtp&token={token}:
+    post:
+      operationId: getNtp
+      summary: Get NTP settings
+      description: Retrieves Network Time Protocol configuration.
+      tags:
+        - Network
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: NTP settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetEmail&token={token}:
+    post:
+      operationId: getEmail
+      summary: Get email notification settings
+      description: Retrieves email notification configuration for alerts.
+      tags:
+        - Network
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Email settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetFtp&token={token}:
+    post:
+      operationId: getFtp
+      summary: Get FTP upload settings
+      description: Retrieves FTP server configuration for recording and snapshot uploads.
+      tags:
+        - Network
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: FTP settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetPush&token={token}:
+    post:
+      operationId: getPush
+      summary: Get push notification settings
+      description: Retrieves push notification configuration.
+      tags:
+        - Network
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Push notification settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetUpnp&token={token}:
+    post:
+      operationId: getUpnp
+      summary: Get UPnP settings
+      description: Retrieves Universal Plug and Play network configuration.
+      tags:
+        - Network
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: UPnP settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetImage&token={token}:
+    post:
+      operationId: getImage
+      summary: Get image settings
+      description: Retrieves image quality settings including brightness, contrast, and saturation.
+      tags:
+        - Video
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Image settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetImage&token={token}:
+    post:
+      operationId: setImage
+      summary: Set image settings
+      description: Configures image quality settings including brightness, contrast, and saturation.
+      tags:
+        - Video
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Image settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetOsd&token={token}:
+    post:
+      operationId: getOsd
+      summary: Get on-screen display settings
+      description: Retrieves on-screen display (OSD) overlay settings for video channels.
+      tags:
+        - Video
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: OSD settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetOsd&token={token}:
+    post:
+      operationId: setOsd
+      summary: Set on-screen display settings
+      description: Configures on-screen display overlay text and position.
+      tags:
+        - Video
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: OSD settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetIsp&token={token}:
+    post:
+      operationId: getIsp
+      summary: Get ISP settings
+      description: Retrieves image signal processor settings for video quality tuning.
+      tags:
+        - Video
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: ISP settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetMask&token={token}:
+    post:
+      operationId: getMask
+      summary: Get privacy mask settings
+      description: Retrieves privacy mask overlay configuration for obscuring areas of the video.
+      tags:
+        - Video
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Privacy mask settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetMask&token={token}:
+    post:
+      operationId: setMask
+      summary: Set privacy mask settings
+      description: Configures privacy mask overlay regions on the video.
+      tags:
+        - Video
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Privacy mask settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=Snap&token={token}:
+    post:
+      operationId: snap
+      summary: Capture snapshot
+      description: Captures a JPEG snapshot image from the specified camera channel.
+      tags:
+        - Video
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Snapshot captured
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+  /cgi-bin/api.cgi?cmd=GetEnc&token={token}:
+    post:
+      operationId: getEnc
+      summary: Get encoding settings
+      description: Retrieves video encoding parameters including resolution, bitrate, and frame rate.
+      tags:
+        - Encoding
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Encoding settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetEnc&token={token}:
+    post:
+      operationId: setEnc
+      summary: Set encoding settings
+      description: Configures video encoding parameters including resolution, bitrate, and frame rate.
+      tags:
+        - Encoding
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Encoding settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetRec&token={token}:
+    post:
+      operationId: getRec
+      summary: Get recording settings
+      description: Retrieves recording schedule and configuration parameters.
+      tags:
+        - Recording
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Recording settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetRec&token={token}:
+    post:
+      operationId: setRec
+      summary: Set recording settings
+      description: Configures recording schedule and parameters.
+      tags:
+        - Recording
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Recording settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=Search&token={token}:
+    post:
+      operationId: searchRecordings
+      summary: Search recordings
+      description: Searches for recordings by date, time range, and channel.
+      tags:
+        - Recording
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Search results returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+  /cgi-bin/api.cgi?cmd=PtzCtrl&token={token}:
+    post:
+      operationId: ptzCtrl
+      summary: Control PTZ movement
+      description: >-
+        Controls pan, tilt, and zoom movements of PTZ-capable cameras.
+        Supported operations include directional movement (Up, Down, Left,
+        Right), zoom (ZoomInc, ZoomDec), focus (FocusInc, FocusDec),
+        preset navigation (ToPos), and Stop.
+      tags:
+        - PTZ
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PtzCtrlRequest'
+      responses:
+        '200':
+          description: PTZ command executed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetPtzPreset&token={token}:
+    post:
+      operationId: getPtzPreset
+      summary: Get PTZ presets
+      description: Retrieves the list of configured PTZ preset positions.
+      tags:
+        - PTZ
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: PTZ presets retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetPtzPreset&token={token}:
+    post:
+      operationId: setPtzPreset
+      summary: Set PTZ preset position
+      description: Saves the current PTZ position as a named preset.
+      tags:
+        - PTZ
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: PTZ preset saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetPtzPatrol&token={token}:
+    post:
+      operationId: getPtzPatrol
+      summary: Get PTZ patrol settings
+      description: Retrieves PTZ patrol route configuration.
+      tags:
+        - PTZ
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: PTZ patrol settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetPtzPatrol&token={token}:
+    post:
+      operationId: setPtzPatrol
+      summary: Set PTZ patrol configuration
+      description: Configures PTZ patrol routes and timing.
+      tags:
+        - PTZ
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: PTZ patrol settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=PtzCheck&token={token}:
+    post:
+      operationId: ptzCheck
+      summary: Calibrate PTZ
+      description: Initiates PTZ calibration to reset the pan-tilt-zoom mechanism.
+      tags:
+        - PTZ
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: PTZ calibration started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetPtzCheckState&token={token}:
+    post:
+      operationId: getPtzCheckState
+      summary: Get PTZ calibration status
+      description: Retrieves the current state of PTZ calibration.
+      tags:
+        - PTZ
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: PTZ calibration state retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetMdAlarm&token={token}:
+    post:
+      operationId: getMdAlarm
+      summary: Get motion detection alarm settings
+      description: Retrieves motion detection alarm configuration including sensitivity and zones.
+      tags:
+        - Alarm
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Motion detection settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetMdAlarm&token={token}:
+    post:
+      operationId: setMdAlarm
+      summary: Set motion detection alarm settings
+      description: Configures motion detection alarm sensitivity, zones, and schedules.
+      tags:
+        - Alarm
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Motion detection settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAiAlarm&token={token}:
+    post:
+      operationId: getAiAlarm
+      summary: Get AI detection alarm settings
+      description: >-
+        Retrieves AI-powered detection alarm settings including person,
+        vehicle, and animal detection configurations.
+      tags:
+        - Alarm
+        - AI
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: AI alarm settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetAiAlarm&token={token}:
+    post:
+      operationId: setAiAlarm
+      summary: Set AI detection alarm settings
+      description: Configures AI-powered object detection alarm parameters.
+      tags:
+        - Alarm
+        - AI
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: AI alarm settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAlarmArea&token={token}:
+    post:
+      operationId: getAlarmArea
+      summary: Get alarm detection area
+      description: Retrieves the configured alarm detection area zones.
+      tags:
+        - Alarm
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Alarm area settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetAlarmArea&token={token}:
+    post:
+      operationId: setAlarmArea
+      summary: Set alarm detection area
+      description: Configures alarm detection area zones.
+      tags:
+        - Alarm
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Alarm area settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAudioAlarm&token={token}:
+    post:
+      operationId: getAudioAlarm
+      summary: Get audio alarm settings
+      description: Retrieves audio detection alarm configuration.
+      tags:
+        - Alarm
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Audio alarm settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetIrLights&token={token}:
+    post:
+      operationId: setIrLights
+      summary: Set infrared light settings
+      description: >-
+        Configures infrared LED illumination settings for night vision,
+        including auto, on, and off modes.
+      tags:
+        - LED
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: IR light settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetIrLights&token={token}:
+    post:
+      operationId: getIrLights
+      summary: Get infrared light settings
+      description: Retrieves the current infrared LED illumination configuration.
+      tags:
+        - LED
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: IR light settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetPowerLed&token={token}:
+    post:
+      operationId: getPowerLed
+      summary: Get power LED settings
+      description: Retrieves the power indicator LED configuration.
+      tags:
+        - LED
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Power LED settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetPowerLed&token={token}:
+    post:
+      operationId: setPowerLed
+      summary: Set power LED settings
+      description: Configures the power indicator LED behavior.
+      tags:
+        - LED
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Power LED settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetWhiteLed&token={token}:
+    post:
+      operationId: getWhiteLed
+      summary: Get white light LED settings
+      description: Retrieves white spotlight LED configuration for color night vision.
+      tags:
+        - LED
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: White LED settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetWhiteLed&token={token}:
+    post:
+      operationId: setWhiteLed
+      summary: Set white light LED settings
+      description: Configures white spotlight LED for color night vision.
+      tags:
+        - LED
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: White LED settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAiState&token={token}:
+    post:
+      operationId: getAiState
+      summary: Get AI detection state
+      description: >-
+        Retrieves the current state of AI-powered object detection including
+        person, vehicle, and animal detection status.
+      tags:
+        - AI
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: AI detection state retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAiCfg&token={token}:
+    post:
+      operationId: getAiCfg
+      summary: Get AI configuration
+      description: Retrieves AI detection configuration and sensitivity settings.
+      tags:
+        - AI
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: AI configuration retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetAiCfg&token={token}:
+    post:
+      operationId: setAiCfg
+      summary: Set AI configuration
+      description: Configures AI detection parameters and sensitivity thresholds.
+      tags:
+        - AI
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: AI configuration updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAutoFocus&token={token}:
+    post:
+      operationId: getAutoFocus
+      summary: Get autofocus settings
+      description: Retrieves autofocus configuration.
+      tags:
+        - AI
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Autofocus settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAutoTrack&token={token}:
+    post:
+      operationId: getAutoTrack
+      summary: Get auto-tracking settings
+      description: Retrieves AI auto-tracking configuration for PTZ cameras.
+      tags:
+        - AI
+        - PTZ
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Auto-tracking settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetAutoTrack&token={token}:
+    post:
+      operationId: setAutoTrack
+      summary: Set auto-tracking settings
+      description: Configures AI auto-tracking behavior for PTZ cameras.
+      tags:
+        - AI
+        - PTZ
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Auto-tracking settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+components:
+  parameters:
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Authentication token obtained from the Login command
+      schema:
+        type: string
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+        - cmd
+        - action
+        - param
+      properties:
+        cmd:
+          type: string
+          enum:
+            - Login
+        action:
+          type: integer
+          enum:
+            - 0
+        param:
+          type: object
+          required:
+            - User
+          properties:
+            User:
+              type: object
+              required:
+                - userName
+                - password
+              properties:
+                userName:
+                  type: string
+                  description: Username for authentication
+                password:
+                  type: string
+                  description: Password for authentication
+    LoginResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+        code:
+          type: integer
+        value:
+          type: object
+          properties:
+            Token:
+              type: object
+              properties:
+                leaseTime:
+                  type: integer
+                  description: Token validity duration in seconds
+                name:
+                  type: string
+                  description: Authentication token string
+    CommandRequest:
+      type: object
+      required:
+        - cmd
+        - action
+      properties:
+        cmd:
+          type: string
+          description: The API command name
+        action:
+          type: integer
+          description: Action type (0 for get, 1 for set)
+        param:
+          type: object
+          description: Command-specific parameters
+    CommandResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+          description: The command that was executed
+        code:
+          type: integer
+          description: Response code (0 for success)
+        value:
+          type: object
+          description: Command-specific response data
+        error:
+          type: object
+          properties:
+            rspCode:
+              type: integer
+              description: Error response code
+            detail:
+              type: string
+              description: Error detail message
+    ChannelRequest:
+      type: object
+      required:
+        - cmd
+        - action
+        - param
+      properties:
+        cmd:
+          type: string
+          description: The API command name
+        action:
+          type: integer
+          description: Action type (0 for get)
+        param:
+          type: object
+          required:
+            - channel
+          properties:
+            channel:
+              type: integer
+              description: Camera channel number (starting from 0)
+    DevInfoResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+        code:
+          type: integer
+        value:
+          type: object
+          properties:
+            DevInfo:
+              type: object
+              properties:
+                B485:
+                  type: integer
+                IOInputNum:
+                  type: integer
+                IOOutputNum:
+                  type: integer
+                audioNum:
+                  type: integer
+                buildDay:
+                  type: string
+                cfgVer:
+                  type: string
+                channelNum:
+                  type: integer
+                detail:
+                  type: string
+                diskNum:
+                  type: integer
+                firmVer:
+                  type: string
+                frameworkVer:
+                  type: integer
+                hardVer:
+                  type: string
+                model:
+                  type: string
+                name:
+                  type: string
+                pakSuffix:
+                  type: string
+                serial:
+                  type: string
+                type:
+                  type: string
+                wifi:
+                  type: integer
+    PtzCtrlRequest:
+      type: object
+      required:
+        - cmd
+        - action
+        - param
+      properties:
+        cmd:
+          type: string
+          enum:
+            - PtzCtrl
+        action:
+          type: integer
+          enum:
+            - 0
+        param:
+          type: object
+          required:
+            - channel
+            - op
+          properties:
+            channel:
+              type: integer
+              description: Camera channel number
+            op:
+              type: string
+              description: >-
+                PTZ operation to perform
+              enum:
+                - Stop
+                - Left
+                - Right
+                - Up
+                - Down
+                - LeftUp
+                - LeftDown
+                - RightUp
+                - RightDown
+                - ZoomInc
+                - ZoomDec
+                - FocusInc
+                - FocusDec
+                - ToPos
+                - Auto
+            speed:
+              type: integer
+              description: Movement speed (1-64)
+              minimum: 1
+              maximum: 64
+            id:
+              type: integer
+              description: Preset ID for ToPos operation
+    SearchRequest:
+      type: object
+      required:
+        - cmd
+        - action
+        - param
+      properties:
+        cmd:
+          type: string
+          enum:
+            - Search
+        action:
+          type: integer
+          enum:
+            - 0
+        param:
+          type: object
+          required:
+            - Search
+          properties:
+            Search:
+              type: object
+              required:
+                - channel
+                - onlyStatus
+                - streamType
+                - StartTime
+                - EndTime
+              properties:
+                channel:
+                  type: integer
+                onlyStatus:
+                  type: integer
+                  description: 0 for full results, 1 for status only
+                streamType:
+                  type: string
+                  enum:
+                    - main
+                    - sub
+                StartTime:
+                  type: object
+                  properties:
+                    year:
+                      type: integer
+                    mon:
+                      type: integer
+                    day:
+                      type: integer
+                    hour:
+                      type: integer
+                    min:
+                      type: integer
+                    sec:
+                      type: integer
+                EndTime:
+                  type: object
+                  properties:
+                    year:
+                      type: integer
+                    mon:
+                      type: integer
+                    day:
+                      type: integer
+                    hour:
+                      type: integer
+                    min:
+                      type: integer
+                    sec:
+                      type: integer
+    SearchResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+        code:
+          type: integer
+        value:
+          type: object
+          properties:
+            SearchResult:
+              type: object
+              properties:
+                channel:
+                  type: integer
+                Status:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      year:
+                        type: integer
+                      mon:
+                        type: integer
+                      table:
+                        type: string
+                        description: Bitmask of days with recordings
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: query
+      name: token
+      description: >-
+        Authentication token obtained from the Login command. Pass as a
+        query parameter on all requests after authentication.
+security:
+  - tokenAuth: []
+tags:
+  - name: Authentication
+    description: Login, logout, and session token management
+  - name: System
+    description: Device information, maintenance, time settings, firmware, and storage
+  - name: Security
+    description: User management and access control
+  - name: Network
+    description: Network configuration, WiFi, DDNS, NTP, email, FTP, and push notifications
+  - name: Video
+    description: Image quality, OSD, ISP settings, privacy masks, and snapshot capture
+  - name: Encoding
+    description: Video stream encoding parameters and compression settings
+  - name: Recording
+    description: Recording schedules, search, and playback
+  - name: PTZ
+    description: Pan-tilt-zoom control, presets, patrols, and calibration
+  - name: Alarm
+    description: Motion detection, audio alarms, and detection zone configuration
+  - name: LED
+    description: Infrared, white light, and power indicator LED control
+  - name: AI
+    description: AI-powered object detection, auto-tracking, and autofocus

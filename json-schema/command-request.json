@@ -1,0 +1,23 @@
+{
+  "$id": "command-request.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reolink Command Request",
+  "description": "Base request structure for all Reolink Camera HTTP API commands sent as JSON POST to /cgi-bin/api.cgi.",
+  "type": "object",
+  "properties": {
+    "cmd": {
+      "type": "string",
+      "description": "The API command name to execute (e.g., Login, GetDevInfo, PtzCtrl)"
+    },
+    "action": {
+      "type": "integer",
+      "description": "Action type: 0 for get/read operations, 1 for set/write operations",
+      "enum": [0, 1]
+    },
+    "param": {
+      "type": "object",
+      "description": "Command-specific parameters"
+    }
+  },
+  "required": ["cmd", "action"]
+}

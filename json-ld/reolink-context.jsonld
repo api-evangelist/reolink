@@ -1,0 +1,104 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "reolink": "https://reolink.com/api/v1/",
+    "iot": "https://www.w3.org/2019/wot/td#",
+    "sec": "https://w3id.org/security#",
+    "DeviceInfo": {
+      "@id": "reolink:DeviceInfo",
+      "@context": {
+        "model": "reolink:model",
+        "firmVer": "reolink:firmwareVersion",
+        "hardVer": "reolink:hardwareVersion",
+        "serial": "serialNumber",
+        "name": "name",
+        "channelNum": "reolink:channelCount",
+        "type": "reolink:deviceType",
+        "wifi": "reolink:wifiSupport",
+        "diskNum": "reolink:diskCount",
+        "buildDay": "reolink:buildDate"
+      }
+    },
+    "Camera": {
+      "@id": "reolink:Camera",
+      "@type": "iot:Thing",
+      "@context": {
+        "channel": "reolink:channel",
+        "status": "reolink:status",
+        "streamType": "reolink:streamType"
+      }
+    },
+    "Authentication": {
+      "@id": "reolink:Authentication",
+      "@context": {
+        "token": "sec:token",
+        "leaseTime": "reolink:tokenLeaseTime",
+        "userName": "reolink:userName"
+      }
+    },
+    "PTZControl": {
+      "@id": "reolink:PTZControl",
+      "@context": {
+        "operation": "reolink:ptzOperation",
+        "speed": "reolink:ptzSpeed",
+        "presetId": "reolink:presetId",
+        "channel": "reolink:channel"
+      }
+    },
+    "Recording": {
+      "@id": "reolink:Recording",
+      "@context": {
+        "channel": "reolink:channel",
+        "startTime": "startDate",
+        "endTime": "endDate",
+        "streamType": "reolink:streamType"
+      }
+    },
+    "AlarmSettings": {
+      "@id": "reolink:AlarmSettings",
+      "@context": {
+        "alarmType": "reolink:alarmType",
+        "sensitivity": "reolink:sensitivity",
+        "enabled": "reolink:enabled",
+        "detectionArea": "reolink:detectionArea"
+      }
+    },
+    "AIDetection": {
+      "@id": "reolink:AIDetection",
+      "@context": {
+        "personDetection": "reolink:personDetection",
+        "vehicleDetection": "reolink:vehicleDetection",
+        "animalDetection": "reolink:animalDetection",
+        "autoTracking": "reolink:autoTracking"
+      }
+    },
+    "NetworkSettings": {
+      "@id": "reolink:NetworkSettings",
+      "@context": {
+        "httpPort": "reolink:httpPort",
+        "httpsPort": "reolink:httpsPort",
+        "rtspPort": "reolink:rtspPort",
+        "onvifPort": "reolink:onvifPort",
+        "ipAddress": "reolink:ipAddress",
+        "macAddress": "reolink:macAddress"
+      }
+    },
+    "LEDControl": {
+      "@id": "reolink:LEDControl",
+      "@context": {
+        "irLights": "reolink:infraredLights",
+        "whiteLed": "reolink:whiteLed",
+        "powerLed": "reolink:powerLed"
+      }
+    },
+    "ImageSettings": {
+      "@id": "reolink:ImageSettings",
+      "@context": {
+        "brightness": "reolink:brightness",
+        "contrast": "reolink:contrast",
+        "saturation": "reolink:saturation",
+        "osd": "reolink:onScreenDisplay"
+      }
+    }
+  }
+}

@@ -1,6 +1,25 @@
 aid: reolink
+name: Reolink
+description: >-
+  Reolink is a provider of security cameras and smart home surveillance
+  technology. Their cameras offer an HTTP API that enables direct device
+  control and configuration through JSON-based POST requests. The API
+  supports comprehensive camera management including PTZ control, video
+  encoding settings, recording search and playback, motion and AI-powered
+  object detection, network configuration, LED control, and user
+  authentication. The API is accessible on the local network via the
+  device IP address.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Security Cameras
+  - IoT
+  - Surveillance
 url: >-
   https://raw.githubusercontent.com/api-evangelist/reolink/refs/heads/main/apis.yml
+created: '2025-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis:
   - aid: reolink:camera-http-api
     name: Reolink Camera HTTP API
@@ -41,14 +60,6 @@ apis:
       PTZ control, alarm and motion detection, LED control, and AI-powered object
       detection with auto-tracking. Authentication uses a token-based session
       system obtained via the Login command.
-name: Reolink
-tags:
-  - Security Cameras
-  - IoT
-  - Surveillance
-type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-access: 3rd-Party
 common:
   - url: https://reolink.com
     name: Reolink
@@ -66,19 +77,6 @@ common:
     name: Reolink Blog
     type: Blog
     description: 'null'
-created: '2025-01-01'
-modified: '2026-03-14'
-position: Consumer
-description: >-
-  Reolink is a provider of security cameras and smart home surveillance
-  technology. Their cameras offer an HTTP API that enables direct device
-  control and configuration through JSON-based POST requests. The API
-  supports comprehensive camera management including PTZ control, video
-  encoding settings, recording search and playback, motion and AI-powered
-  object detection, network configuration, LED control, and user
-  authentication. The API is accessible on the local network via the
-  device IP address.
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
-specificationVersion: '0.19'
+    email: kin@apievangelist.com

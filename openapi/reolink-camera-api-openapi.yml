@@ -30,7 +30,7 @@ paths:
   /cgi-bin/api.cgi:
     post:
       operationId: login
-      summary: Authenticate and obtain session token
+      summary: Reolink Authenticate and obtain session token
       description: >-
         Authenticates a user with the camera and returns a session token
         for use in subsequent API requests.
@@ -56,7 +56,7 @@ paths:
   /cgi-bin/api.cgi?cmd=Logout&token={token}:
     post:
       operationId: logout
-      summary: End session and invalidate token
+      summary: Reolink End session and invalidate token
       description: Logs out the current session and invalidates the authentication token.
       tags:
         - Authentication
@@ -78,7 +78,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetDevInfo&token={token}:
     post:
       operationId: getDevInfo
-      summary: Get device information
+      summary: Reolink Get device information
       description: >-
         Retrieves device information including model, hardware version,
         firmware version, device name, and channel count.
@@ -102,7 +102,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetAbility&token={token}:
     post:
       operationId: getAbility
-      summary: Get user abilities and permissions
+      summary: Reolink Get user abilities and permissions
       description: Retrieves the abilities and permissions available to the authenticated user.
       tags:
         - System
@@ -124,7 +124,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetTime&token={token}:
     post:
       operationId: getTime
-      summary: Get device time
+      summary: Reolink Get device time
       description: Retrieves the current date and time settings of the device.
       tags:
         - System
@@ -146,7 +146,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetTime&token={token}:
     post:
       operationId: setTime
-      summary: Set device time
+      summary: Reolink Set device time
       description: Configures the date and time settings of the device.
       tags:
         - System
@@ -168,7 +168,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetHddInfo&token={token}:
     post:
       operationId: getHddInfo
-      summary: Get storage information
+      summary: Reolink Get storage information
       description: Retrieves hard disk drive information including capacity and status.
       tags:
         - System
@@ -190,7 +190,7 @@ paths:
   /cgi-bin/api.cgi?cmd=FormatHdd&token={token}:
     post:
       operationId: formatHdd
-      summary: Format storage drive
+      summary: Reolink Format storage drive
       description: Formats the hard disk drive on the device, erasing all recordings.
       tags:
         - System
@@ -212,7 +212,7 @@ paths:
   /cgi-bin/api.cgi?cmd=Reboot&token={token}:
     post:
       operationId: reboot
-      summary: Reboot the device
+      summary: Reolink Reboot the device
       description: Reboots the camera or NVR device.
       tags:
         - System
@@ -234,7 +234,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetDevName&token={token}:
     post:
       operationId: getDevName
-      summary: Get device name
+      summary: Reolink Get device name
       description: Retrieves the configured name of the device.
       tags:
         - System
@@ -256,7 +256,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetDevName&token={token}:
     post:
       operationId: setDevName
-      summary: Set device name
+      summary: Reolink Set device name
       description: Configures the name of the device.
       tags:
         - System
@@ -278,7 +278,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetAutoMaint&token={token}:
     post:
       operationId: getAutoMaint
-      summary: Get automatic maintenance settings
+      summary: Reolink Get automatic maintenance settings
       description: Retrieves automatic maintenance and reboot scheduling settings.
       tags:
         - System
@@ -300,7 +300,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetAutoUpgrade&token={token}:
     post:
       operationId: getAutoUpgrade
-      summary: Get auto upgrade settings
+      summary: Reolink Get auto upgrade settings
       description: Retrieves automatic firmware upgrade configuration.
       tags:
         - System
@@ -322,7 +322,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetChannelStatus&token={token}:
     post:
       operationId: getChannelStatus
-      summary: Get channel status
+      summary: Reolink Get channel status
       description: Retrieves the status of all camera channels including online/offline state.
       tags:
         - System
@@ -344,7 +344,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetUser&token={token}:
     post:
       operationId: getUser
-      summary: Get user information
+      summary: Reolink Get user information
       description: Retrieves user account information and management settings.
       tags:
         - Security
@@ -366,7 +366,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetOnline&token={token}:
     post:
       operationId: getOnline
-      summary: Get online users
+      summary: Reolink Get online users
       description: Retrieves the list of currently connected users.
       tags:
         - Security
@@ -388,7 +388,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetNetPort&token={token}:
     post:
       operationId: getNetPort
-      summary: Get network port configuration
+      summary: Reolink Get network port configuration
       description: Retrieves network port settings including HTTP, HTTPS, RTSP, and ONVIF ports.
       tags:
         - Network
@@ -410,7 +410,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetNetPort&token={token}:
     post:
       operationId: setNetPort
-      summary: Set network port configuration
+      summary: Reolink Set network port configuration
       description: Configures network port settings.
       tags:
         - Network
@@ -432,7 +432,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetLocalLink&token={token}:
     post:
       operationId: getLocalLink
-      summary: Get local network link settings
+      summary: Reolink Get local network link settings
       description: Retrieves local network link configuration including IP address and DNS.
       tags:
         - Network
@@ -454,7 +454,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetWifi&token={token}:
     post:
       operationId: getWifi
-      summary: Get WiFi configuration
+      summary: Reolink Get WiFi configuration
       description: Retrieves wireless network configuration settings.
       tags:
         - Network
@@ -476,7 +476,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetDdns&token={token}:
     post:
       operationId: getDdns
-      summary: Get DDNS settings
+      summary: Reolink Get DDNS settings
       description: Retrieves Dynamic DNS configuration.
       tags:
         - Network
@@ -498,7 +498,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetNtp&token={token}:
     post:
       operationId: getNtp
-      summary: Get NTP settings
+      summary: Reolink Get NTP settings
       description: Retrieves Network Time Protocol configuration.
       tags:
         - Network
@@ -520,7 +520,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetEmail&token={token}:
     post:
       operationId: getEmail
-      summary: Get email notification settings
+      summary: Reolink Get email notification settings
       description: Retrieves email notification configuration for alerts.
       tags:
         - Network
@@ -542,7 +542,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetFtp&token={token}:
     post:
       operationId: getFtp
-      summary: Get FTP upload settings
+      summary: Reolink Get FTP upload settings
       description: Retrieves FTP server configuration for recording and snapshot uploads.
       tags:
         - Network
@@ -564,7 +564,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetPush&token={token}:
     post:
       operationId: getPush
-      summary: Get push notification settings
+      summary: Reolink Get push notification settings
       description: Retrieves push notification configuration.
       tags:
         - Network
@@ -586,7 +586,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetUpnp&token={token}:
     post:
       operationId: getUpnp
-      summary: Get UPnP settings
+      summary: Reolink Get UPnP settings
       description: Retrieves Universal Plug and Play network configuration.
       tags:
         - Network
@@ -608,7 +608,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetImage&token={token}:
     post:
       operationId: getImage
-      summary: Get image settings
+      summary: Reolink Get image settings
       description: Retrieves image quality settings including brightness, contrast, and saturation.
       tags:
         - Video
@@ -630,7 +630,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetImage&token={token}:
     post:
       operationId: setImage
-      summary: Set image settings
+      summary: Reolink Set image settings
       description: Configures image quality settings including brightness, contrast, and saturation.
       tags:
         - Video
@@ -652,7 +652,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetOsd&token={token}:
     post:
       operationId: getOsd
-      summary: Get on-screen display settings
+      summary: Reolink Get on-screen display settings
       description: Retrieves on-screen display (OSD) overlay settings for video channels.
       tags:
         - Video
@@ -674,7 +674,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetOsd&token={token}:
     post:
       operationId: setOsd
-      summary: Set on-screen display settings
+      summary: Reolink Set on-screen display settings
       description: Configures on-screen display overlay text and position.
       tags:
         - Video
@@ -696,7 +696,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetIsp&token={token}:
     post:
       operationId: getIsp
-      summary: Get ISP settings
+      summary: Reolink Get ISP settings
       description: Retrieves image signal processor settings for video quality tuning.
       tags:
         - Video
@@ -718,7 +718,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetMask&token={token}:
     post:
       operationId: getMask
-      summary: Get privacy mask settings
+      summary: Reolink Get privacy mask settings
       description: Retrieves privacy mask overlay configuration for obscuring areas of the video.
       tags:
         - Video
@@ -740,7 +740,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetMask&token={token}:
     post:
       operationId: setMask
-      summary: Set privacy mask settings
+      summary: Reolink Set privacy mask settings
       description: Configures privacy mask overlay regions on the video.
       tags:
         - Video
@@ -762,7 +762,7 @@ paths:
   /cgi-bin/api.cgi?cmd=Snap&token={token}:
     post:
       operationId: snap
-      summary: Capture snapshot
+      summary: Reolink Capture snapshot
       description: Captures a JPEG snapshot image from the specified camera channel.
       tags:
         - Video
@@ -785,7 +785,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetEnc&token={token}:
     post:
       operationId: getEnc
-      summary: Get encoding settings
+      summary: Reolink Get encoding settings
       description: Retrieves video encoding parameters including resolution, bitrate, and frame rate.
       tags:
         - Encoding
@@ -807,7 +807,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetEnc&token={token}:
     post:
       operationId: setEnc
-      summary: Set encoding settings
+      summary: Reolink Set encoding settings
       description: Configures video encoding parameters including resolution, bitrate, and frame rate.
       tags:
         - Encoding
@@ -829,7 +829,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetRec&token={token}:
     post:
       operationId: getRec
-      summary: Get recording settings
+      summary: Reolink Get recording settings
       description: Retrieves recording schedule and configuration parameters.
       tags:
         - Recording
@@ -851,7 +851,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetRec&token={token}:
     post:
       operationId: setRec
-      summary: Set recording settings
+      summary: Reolink Set recording settings
       description: Configures recording schedule and parameters.
       tags:
         - Recording
@@ -873,7 +873,7 @@ paths:
   /cgi-bin/api.cgi?cmd=Search&token={token}:
     post:
       operationId: searchRecordings
-      summary: Search recordings
+      summary: Reolink Search recordings
       description: Searches for recordings by date, time range, and channel.
       tags:
         - Recording
@@ -895,7 +895,7 @@ paths:
   /cgi-bin/api.cgi?cmd=PtzCtrl&token={token}:
     post:
       operationId: ptzCtrl
-      summary: Control PTZ movement
+      summary: Reolink Control PTZ movement
       description: >-
         Controls pan, tilt, and zoom movements of PTZ-capable cameras.
         Supported operations include directional movement (Up, Down, Left,
@@ -921,7 +921,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetPtzPreset&token={token}:
     post:
       operationId: getPtzPreset
-      summary: Get PTZ presets
+      summary: Reolink Get PTZ presets
       description: Retrieves the list of configured PTZ preset positions.
       tags:
         - PTZ
@@ -943,7 +943,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetPtzPreset&token={token}:
     post:
       operationId: setPtzPreset
-      summary: Set PTZ preset position
+      summary: Reolink Set PTZ preset position
       description: Saves the current PTZ position as a named preset.
       tags:
         - PTZ
@@ -965,7 +965,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetPtzPatrol&token={token}:
     post:
       operationId: getPtzPatrol
-      summary: Get PTZ patrol settings
+      summary: Reolink Get PTZ patrol settings
       description: Retrieves PTZ patrol route configuration.
       tags:
         - PTZ
@@ -987,7 +987,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetPtzPatrol&token={token}:
     post:
       operationId: setPtzPatrol
-      summary: Set PTZ patrol configuration
+      summary: Reolink Set PTZ patrol configuration
       description: Configures PTZ patrol routes and timing.
       tags:
         - PTZ
@@ -1009,7 +1009,7 @@ paths:
   /cgi-bin/api.cgi?cmd=PtzCheck&token={token}:
     post:
       operationId: ptzCheck
-      summary: Calibrate PTZ
+      summary: Reolink Calibrate PTZ
       description: Initiates PTZ calibration to reset the pan-tilt-zoom mechanism.
       tags:
         - PTZ
@@ -1031,7 +1031,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetPtzCheckState&token={token}:
     post:
       operationId: getPtzCheckState
-      summary: Get PTZ calibration status
+      summary: Reolink Get PTZ calibration status
       description: Retrieves the current state of PTZ calibration.
       tags:
         - PTZ
@@ -1053,7 +1053,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetMdAlarm&token={token}:
     post:
       operationId: getMdAlarm
-      summary: Get motion detection alarm settings
+      summary: Reolink Get motion detection alarm settings
       description: Retrieves motion detection alarm configuration including sensitivity and zones.
       tags:
         - Alarm
@@ -1075,7 +1075,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetMdAlarm&token={token}:
     post:
       operationId: setMdAlarm
-      summary: Set motion detection alarm settings
+      summary: Reolink Set motion detection alarm settings
       description: Configures motion detection alarm sensitivity, zones, and schedules.
       tags:
         - Alarm
@@ -1097,7 +1097,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetAiAlarm&token={token}:
     post:
       operationId: getAiAlarm
-      summary: Get AI detection alarm settings
+      summary: Reolink Get AI detection alarm settings
       description: >-
         Retrieves AI-powered detection alarm settings including person,
         vehicle, and animal detection configurations.
@@ -1122,7 +1122,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetAiAlarm&token={token}:
     post:
       operationId: setAiAlarm
-      summary: Set AI detection alarm settings
+      summary: Reolink Set AI detection alarm settings
       description: Configures AI-powered object detection alarm parameters.
       tags:
         - Alarm
@@ -1145,7 +1145,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetAlarmArea&token={token}:
     post:
       operationId: getAlarmArea
-      summary: Get alarm detection area
+      summary: Reolink Get alarm detection area
       description: Retrieves the configured alarm detection area zones.
       tags:
         - Alarm
@@ -1167,7 +1167,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetAlarmArea&token={token}:
     post:
       operationId: setAlarmArea
-      summary: Set alarm detection area
+      summary: Reolink Set alarm detection area
       description: Configures alarm detection area zones.
       tags:
         - Alarm
@@ -1189,7 +1189,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetAudioAlarm&token={token}:
     post:
       operationId: getAudioAlarm
-      summary: Get audio alarm settings
+      summary: Reolink Get audio alarm settings
       description: Retrieves audio detection alarm configuration.
       tags:
         - Alarm
@@ -1211,7 +1211,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetIrLights&token={token}:
     post:
       operationId: setIrLights
-      summary: Set infrared light settings
+      summary: Reolink Set infrared light settings
       description: >-
         Configures infrared LED illumination settings for night vision,
         including auto, on, and off modes.
@@ -1235,7 +1235,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetIrLights&token={token}:
     post:
       operationId: getIrLights
-      summary: Get infrared light settings
+      summary: Reolink Get infrared light settings
       description: Retrieves the current infrared LED illumination configuration.
       tags:
         - LED
@@ -1257,7 +1257,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetPowerLed&token={token}:
     post:
       operationId: getPowerLed
-      summary: Get power LED settings
+      summary: Reolink Get power LED settings
       description: Retrieves the power indicator LED configuration.
       tags:
         - LED
@@ -1279,7 +1279,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetPowerLed&token={token}:
     post:
       operationId: setPowerLed
-      summary: Set power LED settings
+      summary: Reolink Set power LED settings
       description: Configures the power indicator LED behavior.
       tags:
         - LED
@@ -1301,7 +1301,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetWhiteLed&token={token}:
     post:
       operationId: getWhiteLed
-      summary: Get white light LED settings
+      summary: Reolink Get white light LED settings
       description: Retrieves white spotlight LED configuration for color night vision.
       tags:
         - LED
@@ -1323,7 +1323,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetWhiteLed&token={token}:
     post:
       operationId: setWhiteLed
-      summary: Set white light LED settings
+      summary: Reolink Set white light LED settings
       description: Configures white spotlight LED for color night vision.
       tags:
         - LED
@@ -1345,7 +1345,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetAiState&token={token}:
     post:
       operationId: getAiState
-      summary: Get AI detection state
+      summary: Reolink Get AI detection state
       description: >-
         Retrieves the current state of AI-powered object detection including
         person, vehicle, and animal detection status.
@@ -1369,7 +1369,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetAiCfg&token={token}:
     post:
       operationId: getAiCfg
-      summary: Get AI configuration
+      summary: Reolink Get AI configuration
       description: Retrieves AI detection configuration and sensitivity settings.
       tags:
         - AI
@@ -1391,7 +1391,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetAiCfg&token={token}:
     post:
       operationId: setAiCfg
-      summary: Set AI configuration
+      summary: Reolink Set AI configuration
       description: Configures AI detection parameters and sensitivity thresholds.
       tags:
         - AI
@@ -1413,7 +1413,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetAutoFocus&token={token}:
     post:
       operationId: getAutoFocus
-      summary: Get autofocus settings
+      summary: Reolink Get autofocus settings
       description: Retrieves autofocus configuration.
       tags:
         - AI
@@ -1435,7 +1435,7 @@ paths:
   /cgi-bin/api.cgi?cmd=GetAutoTrack&token={token}:
     post:
       operationId: getAutoTrack
-      summary: Get auto-tracking settings
+      summary: Reolink Get auto-tracking settings
       description: Retrieves AI auto-tracking configuration for PTZ cameras.
       tags:
         - AI
@@ -1458,7 +1458,7 @@ paths:
   /cgi-bin/api.cgi?cmd=SetAutoTrack&token={token}:
     post:
       operationId: setAutoTrack
-      summary: Set auto-tracking settings
+      summary: Reolink Set auto-tracking settings
       description: Configures AI auto-tracking behavior for PTZ cameras.
       tags:
         - AI

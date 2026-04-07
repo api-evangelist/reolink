@@ -27,9 +27,11 @@ apis:
       - Security Cameras
       - IoT
       - Surveillance
-    humanURL: https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+    humanURL: 
+      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
     properties:
-      - url: https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+      - url: 
+          https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
         type: Documentation
       - url: openapi/reolink-camera-api-openapi.yml
         type: OpenAPI
@@ -53,13 +55,11 @@ apis:
         type: JSONLD
     description: >-
       The Reolink Camera HTTP API provides a JSON-based interface for controlling
-      and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP
-      POST requests to the /cgi-bin/api.cgi endpoint. The API covers 11 functional
-      modules including authentication, system management, security, network
-      configuration, video and image settings, encoding, recording and playback,
-      PTZ control, alarm and motion detection, LED control, and AI-powered object
-      detection with auto-tracking. Authentication uses a token-based session
-      system obtained via the Login command.
+      and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST
+      requests to the /cgi-bin/api.cgi endpoint. The API covers 11 functional modules
+      including authentication, system management, security, network configuration,
+      video and image settings, encoding, recording and playback, PTZ control, alarm
+      and motion detection, LED control, and AI-powered object detection with auto-tracking.
 common:
   - url: https://reolink.com
     name: Reolink

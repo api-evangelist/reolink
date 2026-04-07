@@ -12,8 +12,8 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Security Cameras
   - IoT
+  - Security Cameras
   - Surveillance
 url: >-
   https://raw.githubusercontent.com/api-evangelist/reolink/refs/heads/main/apis.yml
@@ -24,14 +24,12 @@ apis:
   - aid: reolink:camera-http-api
     name: Reolink Camera HTTP API
     tags:
-      - Security Cameras
       - IoT
+      - Security Cameras
       - Surveillance
-    humanURL: 
-      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+    humanURL: https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
     properties:
-      - url: 
-          https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+      - url: https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
         type: Documentation
       - url: openapi/reolink-camera-api-openapi.yml
         type: OpenAPI

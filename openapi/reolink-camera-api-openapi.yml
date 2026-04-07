@@ -1102,8 +1102,8 @@ paths:
         Retrieves AI-powered detection alarm settings including person,
         vehicle, and animal detection configurations.
       tags:
-        - Alarm
         - AI
+        - Alarm
       parameters:
         - $ref: '#/components/parameters/Token'
       requestBody:
@@ -1125,8 +1125,8 @@ paths:
       summary: Reolink Set AI detection alarm settings
       description: Configures AI-powered object detection alarm parameters.
       tags:
-        - Alarm
         - AI
+        - Alarm
       parameters:
         - $ref: '#/components/parameters/Token'
       requestBody:
@@ -1804,25 +1804,25 @@ components:
 security:
   - tokenAuth: []
 tags:
-  - name: Authentication
-    description: Login, logout, and session token management
-  - name: System
-    description: Device information, maintenance, time settings, firmware, and storage
-  - name: Security
-    description: User management and access control
-  - name: Network
-    description: Network configuration, WiFi, DDNS, NTP, email, FTP, and push notifications
-  - name: Video
-    description: Image quality, OSD, ISP settings, privacy masks, and snapshot capture
-  - name: Encoding
-    description: Video stream encoding parameters and compression settings
-  - name: Recording
-    description: Recording schedules, search, and playback
-  - name: PTZ
-    description: Pan-tilt-zoom control, presets, patrols, and calibration
-  - name: Alarm
-    description: Motion detection, audio alarms, and detection zone configuration
-  - name: LED
-    description: Infrared, white light, and power indicator LED control
   - name: AI
     description: AI-powered object detection, auto-tracking, and autofocus
+  - name: Alarm
+    description: Motion detection, audio alarms, and detection zone configuration
+  - name: Authentication
+    description: Login, logout, and session token management
+  - name: Encoding
+    description: Video stream encoding parameters and compression settings
+  - name: LED
+    description: Infrared, white light, and power indicator LED control
+  - name: Network
+    description: Network configuration, WiFi, DDNS, NTP, email, FTP, and push notifications
+  - name: PTZ
+    description: Pan-tilt-zoom control, presets, patrols, and calibration
+  - name: Recording
+    description: Recording schedules, search, and playback
+  - name: Security
+    description: User management and access control
+  - name: System
+    description: Device information, maintenance, time settings, firmware, and storage
+  - name: Video
+    description: Image quality, OSD, ISP settings, privacy masks, and snapshot capture

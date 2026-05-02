@@ -1,0 +1,104 @@
+{
+  "title": "Reolink Device Structure",
+  "description": "Structural documentation for Reolink camera and NVR device resources",
+  "type": "object",
+  "structure": {
+    "DevInfo": {
+      "type": "object",
+      "description": "Camera or NVR device information",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Device model name",
+          "example": "RLC-810A"
+        },
+        "serial": {
+          "type": "string",
+          "description": "Device serial number",
+          "example": "00000000000000"
+        },
+        "firmVer": {
+          "type": "string",
+          "description": "Firmware version string",
+          "example": "v3.1.0.2368_23062507"
+        },
+        "hardVer": {
+          "type": "string",
+          "description": "Hardware version",
+          "example": "IPC_523128M8MP"
+        },
+        "channelNum": {
+          "type": "integer",
+          "description": "Number of camera channels",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "Device configured name",
+          "example": "Backyard Camera"
+        },
+        "wifi": {
+          "type": "integer",
+          "description": "WiFi capability flag (0=no, 1=yes)",
+          "example": 1
+        }
+      }
+    },
+    "Token": {
+      "type": "object",
+      "description": "Authentication token from login",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Token string used in query parameter",
+          "example": "sample123token456"
+        },
+        "leaseTime": {
+          "type": "integer",
+          "description": "Token validity duration in seconds",
+          "example": 3600
+        }
+      }
+    },
+    "PtzCtrl": {
+      "type": "object",
+      "description": "PTZ control command parameters",
+      "properties": {
+        "channel": {
+          "type": "integer",
+          "description": "Camera channel number (0-based)",
+          "example": 0
+        },
+        "op": {
+          "type": "string",
+          "description": "PTZ operation: Stop, Left, Right, Up, Down, ZoomInc, ZoomDec, ToPos",
+          "example": "Left"
+        },
+        "speed": {
+          "type": "integer",
+          "description": "Movement speed 1-64",
+          "example": 32
+        },
+        "id": {
+          "type": "integer",
+          "description": "Preset ID for ToPos operation",
+          "example": 1
+        }
+      }
+    },
+    "SearchResult": {
+      "type": "object",
+      "description": "Recording search result with day/time bitmap",
+      "properties": {
+        "channel": {
+          "type": "integer",
+          "description": "Camera channel"
+        },
+        "Status": {
+          "type": "array",
+          "description": "Array of months with recording status bitmaps"
+        }
+      }
+    }
+  }
+}

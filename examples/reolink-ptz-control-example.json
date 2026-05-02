@@ -1,0 +1,34 @@
+{
+  "example": "Reolink PTZ Control",
+  "description": "Pan the camera to the left at medium speed",
+  "request": {
+    "method": "POST",
+    "url": "https://192.168.1.100/cgi-bin/api.cgi?cmd=PtzCtrl&token=abcd1234efgh5678",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": [
+      {
+        "cmd": "PtzCtrl",
+        "action": 0,
+        "param": {
+          "channel": 0,
+          "op": "Left",
+          "speed": 32
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "body": [
+      {
+        "cmd": "PtzCtrl",
+        "code": 0,
+        "value": {
+          "rspCode": 200
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "example": "Reolink Camera Login",
+  "description": "Authenticate with a Reolink camera and obtain a session token",
+  "request": {
+    "method": "POST",
+    "url": "https://192.168.1.100/cgi-bin/api.cgi",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": [
+      {
+        "cmd": "Login",
+        "action": 0,
+        "param": {
+          "User": {
+            "userName": "admin",
+            "password": "password123"
+          }
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "body": [
+      {
+        "cmd": "Login",
+        "code": 0,
+        "value": {
+          "Token": {
+            "leaseTime": 3600,
+            "name": "abcd1234efgh5678"
+          }
+        }
+      }
+    ]
+  }
+}

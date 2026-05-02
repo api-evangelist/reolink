@@ -1,0 +1,147 @@
+vocabulary:
+  name: Reolink Vocabulary
+  description: >-
+    Vocabulary and taxonomy for Reolink IP camera and NVR HTTP API covering
+    device control, PTZ operations, recording management, AI detection,
+    and surveillance configuration concepts.
+  version: "1.0"
+  created: "2026-05-02"
+  modified: "2026-05-02"
+  tags:
+    - IoT
+    - Security Cameras
+    - Surveillance
+
+terms:
+
+  # Device Types
+  - term: IP Camera
+    definition: >-
+      A network-connected security camera that transmits video over an IP network.
+      Reolink cameras communicate via HTTP POST requests to the /cgi-bin/api.cgi endpoint.
+    category: Device Type
+    tags: [Hardware, IoT]
+
+  - term: NVR
+    definition: >-
+      Network Video Recorder. A device that records video from multiple IP cameras
+      to local or network storage. Reolink NVRs support the same HTTP API as cameras.
+    category: Device Type
+    tags: [Hardware, Recording]
+
+  - term: Channel
+    definition: >-
+      A numbered video input on a camera (usually channel 0) or NVR (multiple channels).
+      Most API commands require specifying the channel number.
+    category: Device
+    tags: [Configuration, Video]
+
+  # PTZ Operations
+  - term: PTZ
+    definition: >-
+      Pan-Tilt-Zoom. The ability to remotely control the direction and zoom level
+      of a motorized security camera. Reolink PTZ cameras support directional
+      movement, preset positions, patrol routes, and auto-tracking.
+    category: PTZ
+    tags: [PTZ, Control]
+
+  - term: PTZ Preset
+    definition: >-
+      A named, saved camera position (pan, tilt, zoom values) that can be
+      recalled instantly via the ToPos PTZ command using a preset ID number.
+    category: PTZ
+    tags: [PTZ, Configuration]
+
+  - term: PTZ Patrol
+    definition: >-
+      An automated sequence that moves the camera through a series of preset
+      positions with configurable dwell time at each position.
+    category: PTZ
+    tags: [PTZ, Automation]
+
+  # AI Detection
+  - term: AI Detection
+    definition: >-
+      Machine learning-based analysis of camera video to identify specific
+      object categories including persons, vehicles, animals, and faces.
+      Enables targeted alerts vs generic motion detection.
+    category: AI
+    tags: [AI, Detection]
+
+  - term: Auto-Tracking
+    definition: >-
+      AI-powered PTZ feature that automatically follows detected moving objects
+      (persons, vehicles) within the camera's field of view.
+    category: AI
+    tags: [AI, PTZ]
+
+  # Recording
+  - term: Motion Detection
+    definition: >-
+      A triggered recording mode that activates when pixel changes exceed a
+      configured sensitivity threshold in defined detection zones.
+    category: Recording
+    tags: [Recording, Detection]
+
+  - term: Main Stream
+    definition: >-
+      The primary high-resolution video stream used for recording and
+      playback. Reolink cameras typically support H.264 or H.265 encoding.
+    category: Video
+    tags: [Video, Encoding]
+
+  - term: Sub Stream
+    definition: >-
+      A secondary lower-resolution video stream used for remote viewing
+      on mobile devices or networks with limited bandwidth.
+    category: Video
+    tags: [Video, Encoding]
+
+  # Lighting
+  - term: IR LEDs
+    definition: >-
+      Infrared LED illuminators built into Reolink cameras for night vision.
+      Can operate in auto mode (activates in low light), always on, or always off.
+    category: LED
+    tags: [Hardware, Night Vision]
+
+  - term: White Light
+    definition: >-
+      Visible LED spotlights for color night vision (as opposed to IR which
+      produces black-and-white footage). Reolink Color+ cameras include white LEDs.
+    category: LED
+    tags: [Hardware, Night Vision]
+
+  # Network
+  - term: ONVIF
+    definition: >-
+      Open Network Video Interface Forum. An industry standard for IP camera
+      interoperability. Reolink cameras support ONVIF for integration with
+      third-party NVRs and VMS software.
+    category: Network
+    tags: [Standard, Integration]
+
+  - term: RTSP
+    definition: >-
+      Real Time Streaming Protocol. A network protocol used to stream live
+      video from Reolink cameras to media players and VMS software.
+    category: Network
+    tags: [Protocol, Video]
+
+  # Authentication
+  - term: Session Token
+    definition: >-
+      A temporary authentication credential obtained by calling the Login API
+      command with username and password. Must be passed as a token query
+      parameter on all subsequent API requests.
+    category: Security
+    tags: [Authentication, Security]
+
+  # Commands
+  - term: API Command
+    definition: >-
+      A named operation sent as a JSON array to /cgi-bin/api.cgi. Each command
+      has a cmd field (the command name), action field (0=get, 1=set), and
+      an optional param field with command-specific parameters.
+    category: API
+    tags: [API, Protocol]

@@ -1,0 +1,83 @@
+extends: spectral:oas
+
+rules:
+
+  reolink-api-key-auth:
+    description: Reolink API uses token query parameter for authentication
+    message: "API must declare tokenAuth security scheme"
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      function: truthy
+      field: tokenAuth
+
+  reolink-post-only-paths:
+    description: All Reolink API endpoints use POST method only
+    message: "Reolink camera API only supports POST requests"
+    severity: warn
+    given: "$.paths[*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          additionalProperties: false
+          properties:
+            post: {}
+            parameters: {}
+
+  reolink-summaries-title-case:
+    description: Operation summaries must use Title Case
+    message: "Summary '{{value}}' should use Title Case"
+    severity: warn
+    given: "$.paths[*][post].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 &()/.-]*$"
+
+  reolink-operation-tags:
+    description: Operations must have tags for categorization
+    message: "Operation must have at least one tag"
+    severity: warn
+    given: "$.paths[*][post]"
+    then:
+      function: truthy
+      field: tags
+
+  reolink-request-body-required:
+    description: All POST operations must include a request body
+    message: "POST operation must define a requestBody"
+    severity: error
+    given: "$.paths[*].post"
+    then:
+      function: truthy
+      field: requestBody
+
+  reolink-response-200-defined:
+    description: All operations must define a 200 response
+    message: "Operation must define a 200 response"
+    severity: error
+    given: "$.paths[*][post].responses"
+    then:
+      function: truthy
+      field: "200"
+
+  reolink-cmd-param-in-path:
+    description: Reolink command paths should include cmd parameter pattern
+    message: "Reolink paths should follow the /cgi-bin/api.cgi?cmd={Command} pattern"
+    severity: hint
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/cgi-bin/api\\.cgi"
+
+  reolink-operation-id-camel-case:
+    description: Reolink operation IDs must use camelCase
+    message: "Operation ID '{{value}}' must be camelCase"
+    severity: warn
+    given: "$.paths[*][post].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"

@@ -15,19 +15,30 @@ tags:
   - IoT
   - Security Cameras
   - Surveillance
+  - Smart Home
+  - AI Detection
 url: >-
   https://raw.githubusercontent.com/api-evangelist/reolink/refs/heads/main/apis.yml
 created: '2025-01-01'
-modified: '2026-03-16'
+modified: '2026-05-02'
 specificationVersion: '0.19'
 apis:
   - aid: reolink:camera-http-api
     name: Reolink Camera HTTP API
+    description: >-
+      The Reolink Camera HTTP API provides a JSON-based interface for controlling
+      and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST
+      requests to the /cgi-bin/api.cgi endpoint. The API covers 11 functional modules
+      including authentication, system management, security, network configuration,
+      video and image settings, encoding, recording and playback, PTZ control, alarm
+      and motion detection, LED control, and AI-powered object detection with auto-tracking.
+    humanURL: https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
     tags:
       - IoT
       - Security Cameras
       - Surveillance
-    humanURL: https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+      - Smart Home
+      - AI Detection
     properties:
       - url: https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
         type: Documentation
@@ -51,30 +62,39 @@ apis:
         type: JSONSchema
       - url: json-ld/reolink-context.jsonld
         type: JSONLD
-    description: >-
-      The Reolink Camera HTTP API provides a JSON-based interface for controlling
-      and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST
-      requests to the /cgi-bin/api.cgi endpoint. The API covers 11 functional modules
-      including authentication, system management, security, network configuration,
-      video and image settings, encoding, recording and playback, PTZ control, alarm
-      and motion detection, LED control, and AI-powered object detection with auto-tracking.
+      - url: rules/reolink-rules.yml
+        type: Rules
+      - url: capabilities/camera-management.yaml
+        type: Capabilities
+      - url: json-structure/reolink-device-structure.json
+        type: JSONStructure
+      - url: vocabulary/reolink-vocabulary.yml
+        type: Vocabulary
+      - url: examples/reolink-login-example.json
+        type: Example
+      - url: examples/reolink-ptz-control-example.json
+        type: Example
 common:
   - url: https://reolink.com
     name: Reolink
     type: Website
-    description: 'null'
+    description: Reolink security camera manufacturer homepage
   - url: https://community.reolink.com/
     name: Reolink Community Forum
     type: Forum
-    description: 'null'
+    description: Community discussion and API documentation
   - url: https://support.reolink.com/
     name: Reolink Support
     type: Support
-    description: 'null'
+    description: Official technical support portal
   - url: https://reolink.com/blog/
     name: Reolink Blog
     type: Blog
-    description: 'null'
+    description: Product news and smart home tips
+  - url: https://github.com/ReolinkCameraAPI
+    name: Reolink Camera API Community
+    type: GitHubOrganization
+    description: Community-maintained Reolink API SDKs and documentation
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

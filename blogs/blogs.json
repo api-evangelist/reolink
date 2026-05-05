@@ -1,0 +1,13 @@
+{
+  "repo": "reolink",
+  "feeds": [
+    {
+      "source": "https://reolink.com/blog/",
+      "feed_url": "https://reolink.com/feed/",
+      "saved": 10,
+      "title": "Reolink"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:35:11Z"
+}

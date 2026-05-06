@@ -1,401 +1,759 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Reolink Camera Management"
-  description: >-
-    Unified workflow for managing and monitoring Reolink IP cameras and NVRs.
-    Combines device system management, PTZ control, recording search and playback,
-    AI-powered object detection, motion alarm configuration, and LED/lighting control
-    into a single interface for security operators, smart home integrators, and IoT
-    automation platforms.
+  label: Reolink Camera Management
+  description: Unified workflow for managing and monitoring Reolink IP cameras and NVRs. Combines device system management,
+    PTZ control, recording search and playback, AI-powered object detection, motion alarm configuration, and LED/lighting
+    control into a single interface for security operators, smart home integrators, and IoT automation platforms.
   tags:
-    - IoT
-    - Security Cameras
-    - Surveillance
-    - Smart Home
-    - PTZ
-  created: "2026-05-02"
-  modified: "2026-05-02"
-
+  - IoT
+  - Security Cameras
+  - Surveillance
+  - Smart Home
+  - PTZ
+  created: '2026-05-02'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      REOLINK_USERNAME: REOLINK_USERNAME
-      REOLINK_PASSWORD: REOLINK_PASSWORD
-      REOLINK_CAMERA_IP: REOLINK_CAMERA_IP
-
+- namespace: env
+  keys:
+    REOLINK_USERNAME: REOLINK_USERNAME
+    REOLINK_PASSWORD: REOLINK_PASSWORD
+    REOLINK_CAMERA_IP: REOLINK_CAMERA_IP
 capability:
   consumes:
-    - import: reolink
-      location: ./shared/camera-api.yaml
-
+  - type: http
+    namespace: reolink
+    baseUri: https://{REOLINK_CAMERA_IP}
+    description: Reolink camera local HTTP API
+    authentication:
+      type: apikey
+      key: token
+      value: '{{REOLINK_TOKEN}}'
+      placement: query
+    resources:
+    - name: authentication
+      path: /cgi-bin/api.cgi
+      description: Camera authentication and session management
+      operations:
+      - name: login
+        method: POST
+        description: Authenticate and obtain a session token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: Login
+            action: 0
+            param:
+              User:
+                userName: '{{REOLINK_USERNAME}}'
+                password: '{{REOLINK_PASSWORD}}'
+      - name: logout
+        method: POST
+        description: End session and invalidate token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: system
+      path: /cgi-bin/api.cgi
+      description: Device information and system management
+      operations:
+      - name: get-device-info
+        method: POST
+        description: Get device information including model and firmware version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: GetDevInfo
+            action: 0
+            param: {}
+      - name: get-time
+        method: POST
+        description: Get device date and time settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: GetTime
+            action: 0
+            param: {}
+      - name: set-time
+        method: POST
+        description: Set device date and time
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: SetTime
+            action: 0
+            param: '{{tools.timeParam}}'
+      - name: reboot
+        method: POST
+        description: Reboot the camera device
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: Reboot
+            action: 0
+            param: {}
+      - name: get-hdd-info
+        method: POST
+        description: Get storage drive information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: GetHddInfo
+            action: 0
+            param: {}
+      - name: get-channel-status
+        method: POST
+        description: Get status of all camera channels
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: GetChannelStatus
+            action: 0
+            param: {}
+    - name: ptz
+      path: /cgi-bin/api.cgi
+      description: Pan-tilt-zoom control and presets
+      operations:
+      - name: ptz-control
+        method: POST
+        description: Control PTZ movement (pan, tilt, zoom)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: PtzCtrl
+            action: 0
+            param:
+              channel: '{{tools.channel}}'
+              op: '{{tools.op}}'
+              speed: '{{tools.speed}}'
+      - name: get-ptz-presets
+        method: POST
+        description: Get configured PTZ preset positions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: GetPtzPreset
+            action: 0
+            param:
+              channel: '{{tools.channel}}'
+      - name: set-ptz-preset
+        method: POST
+        description: Save current position as a named PTZ preset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: SetPtzPreset
+            action: 0
+            param: '{{tools.presetParam}}'
+    - name: recording
+      path: /cgi-bin/api.cgi
+      description: Recording configuration and search
+      operations:
+      - name: get-recording-settings
+        method: POST
+        description: Get recording schedule and settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: GetRec
+            action: 0
+            param:
+              channel: '{{tools.channel}}'
+      - name: search-recordings
+        method: POST
+        description: Search recordings by date, time range, and channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: Search
+            action: 0
+            param:
+              Search:
+                channel: '{{tools.channel}}'
+                onlyStatus: 0
+                streamType: main
+                StartTime: '{{tools.startTime}}'
+                EndTime: '{{tools.endTime}}'
+    - name: alarm
+      path: /cgi-bin/api.cgi
+      description: Motion detection and alarm configuration
+      operations:
+      - name: get-motion-alarm
+        method: POST
+        description: Get motion detection alarm settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: GetMdAlarm
+            action: 0
+            param:
+              channel: '{{tools.channel}}'
+      - name: set-motion-alarm
+        method: POST
+        description: Configure motion detection alarm settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: SetMdAlarm
+            action: 0
+            param: '{{tools.alarmParam}}'
+    - name: ai-detection
+      path: /cgi-bin/api.cgi
+      description: AI-powered object detection
+      operations:
+      - name: get-ai-state
+        method: POST
+        description: Get AI detection state (person, vehicle, animal)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: GetAiState
+            action: 0
+            param:
+              channel: '{{tools.channel}}'
+      - name: get-ai-config
+        method: POST
+        description: Get AI detection configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: GetAiCfg
+            action: 0
+            param:
+              channel: '{{tools.channel}}'
+      - name: set-ai-config
+        method: POST
+        description: Configure AI detection parameters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: SetAiCfg
+            action: 0
+            param: '{{tools.aiParam}}'
+      - name: get-ai-alarm
+        method: POST
+        description: Get AI alarm settings for object detection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: GetAiAlarm
+            action: 0
+            param:
+              channel: '{{tools.channel}}'
+    - name: video
+      path: /cgi-bin/api.cgi
+      description: Video and image settings
+      operations:
+      - name: get-image-settings
+        method: POST
+        description: Get image quality settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: GetImage
+            action: 0
+            param:
+              channel: '{{tools.channel}}'
+      - name: capture-snapshot
+        method: POST
+        description: Capture a JPEG snapshot from the camera
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: Snap
+            action: 0
+            param:
+              channel: '{{tools.channel}}'
+    - name: led
+      path: /cgi-bin/api.cgi
+      description: IR and white light LED control
+      operations:
+      - name: get-ir-lights
+        method: POST
+        description: Get infrared LED settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: GetIrLights
+            action: 0
+            param:
+              channel: '{{tools.channel}}'
+      - name: set-ir-lights
+        method: POST
+        description: Configure infrared LED for night vision
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            cmd: SetIrLights
+            action: 0
+            param: '{{tools.irParam}}'
   exposes:
-    - type: rest
-      port: 8080
-      namespace: reolink-management-api
-      description: "Unified REST API for Reolink camera management and surveillance."
-      resources:
-        - path: /v1/device/info
-          name: device-info
-          description: "Device system information"
-          operations:
-            - method: GET
-              name: get-device-info
-              description: "Get camera device information and firmware details"
-              call: "reolink.get-device-info"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/device/time
-          name: device-time
-          description: "Device time configuration"
-          operations:
-            - method: GET
-              name: get-time
-              description: "Get device date and time settings"
-              call: "reolink.get-time"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: set-time
-              description: "Set device date and time"
-              call: "reolink.set-time"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/device/channels
-          name: channels
-          description: "Camera channel status"
-          operations:
-            - method: GET
-              name: get-channel-status
-              description: "Get status of all camera channels"
-              call: "reolink.get-channel-status"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/device/storage
-          name: storage
-          description: "Storage drive information"
-          operations:
-            - method: GET
-              name: get-hdd-info
-              description: "Get hard drive storage information"
-              call: "reolink.get-hdd-info"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/ptz/control
-          name: ptz-control
-          description: "PTZ movement control"
-          operations:
-            - method: POST
-              name: ptz-control
-              description: "Control camera pan, tilt, and zoom"
-              call: "reolink.ptz-control"
-              with:
-                channel: "rest.channel"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/ptz/presets
-          name: ptz-presets
-          description: "PTZ preset positions"
-          operations:
-            - method: GET
-              name: get-ptz-presets
-              description: "Get saved PTZ preset positions"
-              call: "reolink.get-ptz-presets"
-              with:
-                channel: "rest.channel"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/recordings/settings
-          name: recording-settings
-          description: "Recording configuration"
-          operations:
-            - method: GET
-              name: get-recording-settings
-              description: "Get recording schedule and settings"
-              call: "reolink.get-recording-settings"
-              with:
-                channel: "rest.channel"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/recordings/search
-          name: recordings-search
-          description: "Search recorded footage"
-          operations:
-            - method: POST
-              name: search-recordings
-              description: "Search recordings by date and time range"
-              call: "reolink.search-recordings"
-              with:
-                channel: "rest.channel"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/alarms/motion
-          name: motion-alarm
-          description: "Motion detection alarm settings"
-          operations:
-            - method: GET
-              name: get-motion-alarm
-              description: "Get motion detection configuration"
-              call: "reolink.get-motion-alarm"
-              with:
-                channel: "rest.channel"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: set-motion-alarm
-              description: "Configure motion detection settings"
-              call: "reolink.set-motion-alarm"
-              with:
-                channel: "rest.channel"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/ai/state
-          name: ai-state
-          description: "AI object detection state"
-          operations:
-            - method: GET
-              name: get-ai-state
-              description: "Get current AI detection state (person, vehicle, animal)"
-              call: "reolink.get-ai-state"
-              with:
-                channel: "rest.channel"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/video/snapshot
-          name: snapshot
-          description: "Capture snapshots"
-          operations:
-            - method: POST
-              name: capture-snapshot
-              description: "Capture a snapshot image from the camera"
-              call: "reolink.capture-snapshot"
-              with:
-                channel: "rest.channel"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/led/ir
-          name: ir-lights
-          description: "Infrared LED control"
-          operations:
-            - method: GET
-              name: get-ir-lights
-              description: "Get infrared LED settings"
-              call: "reolink.get-ir-lights"
-              with:
-                channel: "rest.channel"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: set-ir-lights
-              description: "Configure infrared LED mode"
-              call: "reolink.set-ir-lights"
-              with:
-                channel: "rest.channel"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9080
-      namespace: reolink-management-mcp
-      transport: http
-      description: "MCP server for AI-assisted Reolink camera management and surveillance monitoring."
-      tools:
-        - name: get-device-info
-          description: "Get Reolink camera device information including model, firmware, and hardware details"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "reolink.get-device-info"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-channel-status
-          description: "Get the online/offline status of all camera channels on the NVR"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "reolink.get-channel-status"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-hdd-info
-          description: "Get storage drive capacity and status for the camera or NVR"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "reolink.get-hdd-info"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: reboot-camera
-          description: "Reboot the Reolink camera or NVR device"
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: true
-          call: "reolink.reboot"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: ptz-move
-          description: "Control PTZ camera movement: pan left/right, tilt up/down, zoom in/out, or go to preset"
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: false
-          call: "reolink.ptz-control"
-          with:
-            channel: "tools.channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-ptz-presets
-          description: "Get saved PTZ preset positions for a camera channel"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "reolink.get-ptz-presets"
-          with:
-            channel: "tools.channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: search-recordings
-          description: "Search camera recordings by date/time range and channel"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "reolink.search-recordings"
-          with:
-            channel: "tools.channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-recording-settings
-          description: "Get recording schedule and configuration settings for a channel"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "reolink.get-recording-settings"
-          with:
-            channel: "tools.channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-ai-state
-          description: "Get current AI object detection state (person, vehicle, animal) for a channel"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "reolink.get-ai-state"
-          with:
-            channel: "tools.channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-ai-config
-          description: "Get AI detection configuration and sensitivity settings for a channel"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "reolink.get-ai-config"
-          with:
-            channel: "tools.channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: set-ai-config
-          description: "Configure AI object detection parameters (person/vehicle/animal sensitivity) for a channel"
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: true
-          call: "reolink.set-ai-config"
-          with:
-            channel: "tools.channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-motion-alarm
-          description: "Get motion detection alarm configuration for a camera channel"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "reolink.get-motion-alarm"
-          with:
-            channel: "tools.channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: set-motion-alarm
-          description: "Configure motion detection sensitivity, zones, and schedule for a channel"
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: true
-          call: "reolink.set-motion-alarm"
-          with:
-            channel: "tools.channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: capture-snapshot
-          description: "Capture a JPEG snapshot from a specific camera channel"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "reolink.capture-snapshot"
-          with:
-            channel: "tools.channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-ir-lights
-          description: "Get infrared LED settings for night vision on a camera channel"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "reolink.get-ir-lights"
-          with:
-            channel: "tools.channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: set-ir-lights
-          description: "Configure infrared LED mode (auto/on/off) for night vision"
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: true
-          call: "reolink.set-ir-lights"
-          with:
-            channel: "tools.channel"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: reolink-management-api
+    description: Unified REST API for Reolink camera management and surveillance.
+    resources:
+    - path: /v1/device/info
+      name: device-info
+      description: Device system information
+      operations:
+      - method: GET
+        name: get-device-info
+        description: Get camera device information and firmware details
+        call: reolink.get-device-info
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/device/time
+      name: device-time
+      description: Device time configuration
+      operations:
+      - method: GET
+        name: get-time
+        description: Get device date and time settings
+        call: reolink.get-time
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: set-time
+        description: Set device date and time
+        call: reolink.set-time
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/device/channels
+      name: channels
+      description: Camera channel status
+      operations:
+      - method: GET
+        name: get-channel-status
+        description: Get status of all camera channels
+        call: reolink.get-channel-status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/device/storage
+      name: storage
+      description: Storage drive information
+      operations:
+      - method: GET
+        name: get-hdd-info
+        description: Get hard drive storage information
+        call: reolink.get-hdd-info
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ptz/control
+      name: ptz-control
+      description: PTZ movement control
+      operations:
+      - method: POST
+        name: ptz-control
+        description: Control camera pan, tilt, and zoom
+        call: reolink.ptz-control
+        with:
+          channel: rest.channel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ptz/presets
+      name: ptz-presets
+      description: PTZ preset positions
+      operations:
+      - method: GET
+        name: get-ptz-presets
+        description: Get saved PTZ preset positions
+        call: reolink.get-ptz-presets
+        with:
+          channel: rest.channel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/recordings/settings
+      name: recording-settings
+      description: Recording configuration
+      operations:
+      - method: GET
+        name: get-recording-settings
+        description: Get recording schedule and settings
+        call: reolink.get-recording-settings
+        with:
+          channel: rest.channel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/recordings/search
+      name: recordings-search
+      description: Search recorded footage
+      operations:
+      - method: POST
+        name: search-recordings
+        description: Search recordings by date and time range
+        call: reolink.search-recordings
+        with:
+          channel: rest.channel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/alarms/motion
+      name: motion-alarm
+      description: Motion detection alarm settings
+      operations:
+      - method: GET
+        name: get-motion-alarm
+        description: Get motion detection configuration
+        call: reolink.get-motion-alarm
+        with:
+          channel: rest.channel
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: set-motion-alarm
+        description: Configure motion detection settings
+        call: reolink.set-motion-alarm
+        with:
+          channel: rest.channel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ai/state
+      name: ai-state
+      description: AI object detection state
+      operations:
+      - method: GET
+        name: get-ai-state
+        description: Get current AI detection state (person, vehicle, animal)
+        call: reolink.get-ai-state
+        with:
+          channel: rest.channel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/video/snapshot
+      name: snapshot
+      description: Capture snapshots
+      operations:
+      - method: POST
+        name: capture-snapshot
+        description: Capture a snapshot image from the camera
+        call: reolink.capture-snapshot
+        with:
+          channel: rest.channel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/led/ir
+      name: ir-lights
+      description: Infrared LED control
+      operations:
+      - method: GET
+        name: get-ir-lights
+        description: Get infrared LED settings
+        call: reolink.get-ir-lights
+        with:
+          channel: rest.channel
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: set-ir-lights
+        description: Configure infrared LED mode
+        call: reolink.set-ir-lights
+        with:
+          channel: rest.channel
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9080
+    namespace: reolink-management-mcp
+    transport: http
+    description: MCP server for AI-assisted Reolink camera management and surveillance monitoring.
+    tools:
+    - name: get-device-info
+      description: Get Reolink camera device information including model, firmware, and hardware details
+      hints:
+        readOnly: true
+        openWorld: false
+      call: reolink.get-device-info
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-channel-status
+      description: Get the online/offline status of all camera channels on the NVR
+      hints:
+        readOnly: true
+        openWorld: false
+      call: reolink.get-channel-status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-hdd-info
+      description: Get storage drive capacity and status for the camera or NVR
+      hints:
+        readOnly: true
+        openWorld: false
+      call: reolink.get-hdd-info
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reboot-camera
+      description: Reboot the Reolink camera or NVR device
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: reolink.reboot
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: ptz-move
+      description: 'Control PTZ camera movement: pan left/right, tilt up/down, zoom in/out, or go to preset'
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: reolink.ptz-control
+      with:
+        channel: tools.channel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ptz-presets
+      description: Get saved PTZ preset positions for a camera channel
+      hints:
+        readOnly: true
+        openWorld: false
+      call: reolink.get-ptz-presets
+      with:
+        channel: tools.channel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-recordings
+      description: Search camera recordings by date/time range and channel
+      hints:
+        readOnly: true
+        openWorld: false
+      call: reolink.search-recordings
+      with:
+        channel: tools.channel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-recording-settings
+      description: Get recording schedule and configuration settings for a channel
+      hints:
+        readOnly: true
+        openWorld: false
+      call: reolink.get-recording-settings
+      with:
+        channel: tools.channel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ai-state
+      description: Get current AI object detection state (person, vehicle, animal) for a channel
+      hints:
+        readOnly: true
+        openWorld: false
+      call: reolink.get-ai-state
+      with:
+        channel: tools.channel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ai-config
+      description: Get AI detection configuration and sensitivity settings for a channel
+      hints:
+        readOnly: true
+        openWorld: false
+      call: reolink.get-ai-config
+      with:
+        channel: tools.channel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-ai-config
+      description: Configure AI object detection parameters (person/vehicle/animal sensitivity) for a channel
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: reolink.set-ai-config
+      with:
+        channel: tools.channel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-motion-alarm
+      description: Get motion detection alarm configuration for a camera channel
+      hints:
+        readOnly: true
+        openWorld: false
+      call: reolink.get-motion-alarm
+      with:
+        channel: tools.channel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-motion-alarm
+      description: Configure motion detection sensitivity, zones, and schedule for a channel
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: reolink.set-motion-alarm
+      with:
+        channel: tools.channel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: capture-snapshot
+      description: Capture a JPEG snapshot from a specific camera channel
+      hints:
+        readOnly: true
+        openWorld: false
+      call: reolink.capture-snapshot
+      with:
+        channel: tools.channel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ir-lights
+      description: Get infrared LED settings for night vision on a camera channel
+      hints:
+        readOnly: true
+        openWorld: false
+      call: reolink.get-ir-lights
+      with:
+        channel: tools.channel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-ir-lights
+      description: Configure infrared LED mode (auto/on/off) for night vision
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: reolink.set-ir-lights
+      with:
+        channel: tools.channel
+      outputParameters:
+      - type: object
+        mapping: $.

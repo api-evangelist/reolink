@@ -1,0 +1,376 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reolink Camera HTTP API — AI
+  description: 'Reolink Camera HTTP API — AI. 8 operations. Lead operation: Get AI detection alarm settings. Self-contained
+    Naftiko capability covering one Reolink business surface.'
+  tags:
+  - Reolink
+  - AI
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REOLINK_API_KEY: REOLINK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: camera-ai
+    baseUri: https://{camera_ip}
+    description: Reolink Camera HTTP API — AI business capability. Self-contained, no shared references.
+    resources:
+    - name: cgi-bin-api.cgi?cmd=GetAiAlarm&token={token}
+      path: /cgi-bin/api.cgi?cmd=GetAiAlarm&token={token}
+      operations:
+      - name: getaialarm
+        method: POST
+        description: Get AI detection alarm settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=GetAiCfg&token={token}
+      path: /cgi-bin/api.cgi?cmd=GetAiCfg&token={token}
+      operations:
+      - name: getaicfg
+        method: POST
+        description: Get AI configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=GetAiState&token={token}
+      path: /cgi-bin/api.cgi?cmd=GetAiState&token={token}
+      operations:
+      - name: getaistate
+        method: POST
+        description: Get AI detection state
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=GetAutoFocus&token={token}
+      path: /cgi-bin/api.cgi?cmd=GetAutoFocus&token={token}
+      operations:
+      - name: getautofocus
+        method: POST
+        description: Get autofocus settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=GetAutoTrack&token={token}
+      path: /cgi-bin/api.cgi?cmd=GetAutoTrack&token={token}
+      operations:
+      - name: getautotrack
+        method: POST
+        description: Get auto-tracking settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=SetAiAlarm&token={token}
+      path: /cgi-bin/api.cgi?cmd=SetAiAlarm&token={token}
+      operations:
+      - name: setaialarm
+        method: POST
+        description: Set AI detection alarm settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=SetAiCfg&token={token}
+      path: /cgi-bin/api.cgi?cmd=SetAiCfg&token={token}
+      operations:
+      - name: setaicfg
+        method: POST
+        description: Set AI configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=SetAutoTrack&token={token}
+      path: /cgi-bin/api.cgi?cmd=SetAutoTrack&token={token}
+      operations:
+      - name: setautotrack
+        method: POST
+        description: Set auto-tracking settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: token
+      value: '{{env.REOLINK_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: camera-ai-rest
+    port: 8080
+    description: REST adapter for Reolink Camera HTTP API — AI. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/cgi-bin/api-cgi-cmd-getaialarm-token-token
+      name: cgi-bin-api-cgi-cmd-getaialarm-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=GetAiAlarm&token={token}.
+      operations:
+      - method: POST
+        name: getaialarm
+        description: Get AI detection alarm settings
+        call: camera-ai.getaialarm
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-getaicfg-token-token
+      name: cgi-bin-api-cgi-cmd-getaicfg-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=GetAiCfg&token={token}.
+      operations:
+      - method: POST
+        name: getaicfg
+        description: Get AI configuration
+        call: camera-ai.getaicfg
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-getaistate-token-token
+      name: cgi-bin-api-cgi-cmd-getaistate-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=GetAiState&token={token}.
+      operations:
+      - method: POST
+        name: getaistate
+        description: Get AI detection state
+        call: camera-ai.getaistate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-getautofocus-token-token
+      name: cgi-bin-api-cgi-cmd-getautofocus-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=GetAutoFocus&token={token}.
+      operations:
+      - method: POST
+        name: getautofocus
+        description: Get autofocus settings
+        call: camera-ai.getautofocus
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-getautotrack-token-token
+      name: cgi-bin-api-cgi-cmd-getautotrack-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=GetAutoTrack&token={token}.
+      operations:
+      - method: POST
+        name: getautotrack
+        description: Get auto-tracking settings
+        call: camera-ai.getautotrack
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-setaialarm-token-token
+      name: cgi-bin-api-cgi-cmd-setaialarm-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=SetAiAlarm&token={token}.
+      operations:
+      - method: POST
+        name: setaialarm
+        description: Set AI detection alarm settings
+        call: camera-ai.setaialarm
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-setaicfg-token-token
+      name: cgi-bin-api-cgi-cmd-setaicfg-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=SetAiCfg&token={token}.
+      operations:
+      - method: POST
+        name: setaicfg
+        description: Set AI configuration
+        call: camera-ai.setaicfg
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-setautotrack-token-token
+      name: cgi-bin-api-cgi-cmd-setautotrack-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=SetAutoTrack&token={token}.
+      operations:
+      - method: POST
+        name: setautotrack
+        description: Set auto-tracking settings
+        call: camera-ai.setautotrack
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: camera-ai-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reolink Camera HTTP API — AI. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-ai-detection-alarm-settings
+      description: Get AI detection alarm settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-ai.getaialarm
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ai-configuration
+      description: Get AI configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-ai.getaicfg
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ai-detection-state
+      description: Get AI detection state
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-ai.getaistate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-autofocus-settings
+      description: Get autofocus settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-ai.getautofocus
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-auto-tracking-settings
+      description: Get auto-tracking settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-ai.getautotrack
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-ai-detection-alarm-settings
+      description: Set AI detection alarm settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camera-ai.setaialarm
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-ai-configuration
+      description: Set AI configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camera-ai.setaicfg
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-auto-tracking-settings
+      description: Set auto-tracking settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camera-ai.setautotrack
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

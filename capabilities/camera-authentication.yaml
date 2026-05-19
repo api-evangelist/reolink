@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reolink Camera HTTP API — Authentication
+  description: 'Reolink Camera HTTP API — Authentication. 2 operations. Lead operation: Authenticate and obtain session token.
+    Self-contained Naftiko capability covering one Reolink business surface.'
+  tags:
+  - Reolink
+  - Authentication
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REOLINK_API_KEY: REOLINK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: camera-authentication
+    baseUri: https://{camera_ip}
+    description: Reolink Camera HTTP API — Authentication business capability. Self-contained, no shared references.
+    resources:
+    - name: cgi-bin-api.cgi
+      path: /cgi-bin/api.cgi
+      operations:
+      - name: login
+        method: POST
+        description: Authenticate and obtain session token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=Logout&token={token}
+      path: /cgi-bin/api.cgi?cmd=Logout&token={token}
+      operations:
+      - name: logout
+        method: POST
+        description: End session and invalidate token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: token
+      value: '{{env.REOLINK_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: camera-authentication-rest
+    port: 8080
+    description: REST adapter for Reolink Camera HTTP API — Authentication. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/cgi-bin/api-cgi
+      name: cgi-bin-api-cgi
+      description: REST surface for cgi-bin-api.cgi.
+      operations:
+      - method: POST
+        name: login
+        description: Authenticate and obtain session token
+        call: camera-authentication.login
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-logout-token-token
+      name: cgi-bin-api-cgi-cmd-logout-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=Logout&token={token}.
+      operations:
+      - method: POST
+        name: logout
+        description: End session and invalidate token
+        call: camera-authentication.logout
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: camera-authentication-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reolink Camera HTTP API — Authentication. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: authenticate-and-obtain-session-token
+      description: Authenticate and obtain session token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camera-authentication.login
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: end-session-and-invalidate-token
+      description: End session and invalidate token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-authentication.logout
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

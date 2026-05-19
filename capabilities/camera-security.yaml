@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reolink Camera HTTP API — Security
+  description: 'Reolink Camera HTTP API — Security. 2 operations. Lead operation: Get online users. Self-contained Naftiko
+    capability covering one Reolink business surface.'
+  tags:
+  - Reolink
+  - Security
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REOLINK_API_KEY: REOLINK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: camera-security
+    baseUri: https://{camera_ip}
+    description: Reolink Camera HTTP API — Security business capability. Self-contained, no shared references.
+    resources:
+    - name: cgi-bin-api.cgi?cmd=GetOnline&token={token}
+      path: /cgi-bin/api.cgi?cmd=GetOnline&token={token}
+      operations:
+      - name: getonline
+        method: POST
+        description: Get online users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=GetUser&token={token}
+      path: /cgi-bin/api.cgi?cmd=GetUser&token={token}
+      operations:
+      - name: getuser
+        method: POST
+        description: Get user information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: token
+      value: '{{env.REOLINK_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: camera-security-rest
+    port: 8080
+    description: REST adapter for Reolink Camera HTTP API — Security. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/cgi-bin/api-cgi-cmd-getonline-token-token
+      name: cgi-bin-api-cgi-cmd-getonline-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=GetOnline&token={token}.
+      operations:
+      - method: POST
+        name: getonline
+        description: Get online users
+        call: camera-security.getonline
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-getuser-token-token
+      name: cgi-bin-api-cgi-cmd-getuser-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=GetUser&token={token}.
+      operations:
+      - method: POST
+        name: getuser
+        description: Get user information
+        call: camera-security.getuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: camera-security-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reolink Camera HTTP API — Security. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-online-users
+      description: Get online users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-security.getonline
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-information
+      description: Get user information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-security.getuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

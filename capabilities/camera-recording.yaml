@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reolink Camera HTTP API — Recording
+  description: 'Reolink Camera HTTP API — Recording. 3 operations. Lead operation: Get recording settings. Self-contained
+    Naftiko capability covering one Reolink business surface.'
+  tags:
+  - Reolink
+  - Recording
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REOLINK_API_KEY: REOLINK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: camera-recording
+    baseUri: https://{camera_ip}
+    description: Reolink Camera HTTP API — Recording business capability. Self-contained, no shared references.
+    resources:
+    - name: cgi-bin-api.cgi?cmd=GetRec&token={token}
+      path: /cgi-bin/api.cgi?cmd=GetRec&token={token}
+      operations:
+      - name: getrec
+        method: POST
+        description: Get recording settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=Search&token={token}
+      path: /cgi-bin/api.cgi?cmd=Search&token={token}
+      operations:
+      - name: searchrecordings
+        method: POST
+        description: Search recordings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=SetRec&token={token}
+      path: /cgi-bin/api.cgi?cmd=SetRec&token={token}
+      operations:
+      - name: setrec
+        method: POST
+        description: Set recording settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: token
+      value: '{{env.REOLINK_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: camera-recording-rest
+    port: 8080
+    description: REST adapter for Reolink Camera HTTP API — Recording. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/cgi-bin/api-cgi-cmd-getrec-token-token
+      name: cgi-bin-api-cgi-cmd-getrec-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=GetRec&token={token}.
+      operations:
+      - method: POST
+        name: getrec
+        description: Get recording settings
+        call: camera-recording.getrec
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-search-token-token
+      name: cgi-bin-api-cgi-cmd-search-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=Search&token={token}.
+      operations:
+      - method: POST
+        name: searchrecordings
+        description: Search recordings
+        call: camera-recording.searchrecordings
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-setrec-token-token
+      name: cgi-bin-api-cgi-cmd-setrec-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=SetRec&token={token}.
+      operations:
+      - method: POST
+        name: setrec
+        description: Set recording settings
+        call: camera-recording.setrec
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: camera-recording-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reolink Camera HTTP API — Recording. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-recording-settings
+      description: Get recording settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-recording.getrec
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-recordings
+      description: Search recordings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-recording.searchrecordings
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-recording-settings
+      description: Set recording settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camera-recording.setrec
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

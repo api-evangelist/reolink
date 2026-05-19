@@ -1,0 +1,292 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reolink Camera HTTP API — LED
+  description: 'Reolink Camera HTTP API — LED. 6 operations. Lead operation: Get infrared light settings. Self-contained Naftiko
+    capability covering one Reolink business surface.'
+  tags:
+  - Reolink
+  - LED
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REOLINK_API_KEY: REOLINK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: camera-led
+    baseUri: https://{camera_ip}
+    description: Reolink Camera HTTP API — LED business capability. Self-contained, no shared references.
+    resources:
+    - name: cgi-bin-api.cgi?cmd=GetIrLights&token={token}
+      path: /cgi-bin/api.cgi?cmd=GetIrLights&token={token}
+      operations:
+      - name: getirlights
+        method: POST
+        description: Get infrared light settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=GetPowerLed&token={token}
+      path: /cgi-bin/api.cgi?cmd=GetPowerLed&token={token}
+      operations:
+      - name: getpowerled
+        method: POST
+        description: Get power LED settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=GetWhiteLed&token={token}
+      path: /cgi-bin/api.cgi?cmd=GetWhiteLed&token={token}
+      operations:
+      - name: getwhiteled
+        method: POST
+        description: Get white light LED settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=SetIrLights&token={token}
+      path: /cgi-bin/api.cgi?cmd=SetIrLights&token={token}
+      operations:
+      - name: setirlights
+        method: POST
+        description: Set infrared light settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=SetPowerLed&token={token}
+      path: /cgi-bin/api.cgi?cmd=SetPowerLed&token={token}
+      operations:
+      - name: setpowerled
+        method: POST
+        description: Set power LED settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: cgi-bin-api.cgi?cmd=SetWhiteLed&token={token}
+      path: /cgi-bin/api.cgi?cmd=SetWhiteLed&token={token}
+      operations:
+      - name: setwhiteled
+        method: POST
+        description: Set white light LED settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: token
+      value: '{{env.REOLINK_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: camera-led-rest
+    port: 8080
+    description: REST adapter for Reolink Camera HTTP API — LED. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/cgi-bin/api-cgi-cmd-getirlights-token-token
+      name: cgi-bin-api-cgi-cmd-getirlights-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=GetIrLights&token={token}.
+      operations:
+      - method: POST
+        name: getirlights
+        description: Get infrared light settings
+        call: camera-led.getirlights
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-getpowerled-token-token
+      name: cgi-bin-api-cgi-cmd-getpowerled-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=GetPowerLed&token={token}.
+      operations:
+      - method: POST
+        name: getpowerled
+        description: Get power LED settings
+        call: camera-led.getpowerled
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-getwhiteled-token-token
+      name: cgi-bin-api-cgi-cmd-getwhiteled-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=GetWhiteLed&token={token}.
+      operations:
+      - method: POST
+        name: getwhiteled
+        description: Get white light LED settings
+        call: camera-led.getwhiteled
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-setirlights-token-token
+      name: cgi-bin-api-cgi-cmd-setirlights-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=SetIrLights&token={token}.
+      operations:
+      - method: POST
+        name: setirlights
+        description: Set infrared light settings
+        call: camera-led.setirlights
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-setpowerled-token-token
+      name: cgi-bin-api-cgi-cmd-setpowerled-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=SetPowerLed&token={token}.
+      operations:
+      - method: POST
+        name: setpowerled
+        description: Set power LED settings
+        call: camera-led.setpowerled
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cgi-bin/api-cgi-cmd-setwhiteled-token-token
+      name: cgi-bin-api-cgi-cmd-setwhiteled-token-token
+      description: REST surface for cgi-bin-api.cgi?cmd=SetWhiteLed&token={token}.
+      operations:
+      - method: POST
+        name: setwhiteled
+        description: Set white light LED settings
+        call: camera-led.setwhiteled
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: camera-led-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reolink Camera HTTP API — LED. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-infrared-light-settings
+      description: Get infrared light settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-led.getirlights
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-power-led-settings
+      description: Get power LED settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-led.getpowerled
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-white-light-led-settings
+      description: Get white light LED settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: camera-led.getwhiteled
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-infrared-light-settings
+      description: Set infrared light settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camera-led.setirlights
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-power-led-settings
+      description: Set power LED settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camera-led.setpowerled
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-white-light-led-settings
+      description: Set white light LED settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camera-led.setwhiteled
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

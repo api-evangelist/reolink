@@ -1,0 +1,1593 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reolink Camera HTTP API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate and obtain session token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates a user with the camera and returns a session token for use in subsequent API requests."
+        },
+        {
+          "info": {
+            "name": "End session and invalidate token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=Logout&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Logs out the current session and invalidates the authentication token."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get device information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetDevInfo&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves device information including model, hardware version, firmware version, device name, and channel count."
+        },
+        {
+          "info": {
+            "name": "Get user abilities and permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetAbility&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the abilities and permissions available to the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get device time",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetTime&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the current date and time settings of the device."
+        },
+        {
+          "info": {
+            "name": "Set device time",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetTime&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures the date and time settings of the device."
+        },
+        {
+          "info": {
+            "name": "Get storage information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetHddInfo&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves hard disk drive information including capacity and status."
+        },
+        {
+          "info": {
+            "name": "Format storage drive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=FormatHdd&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Formats the hard disk drive on the device, erasing all recordings."
+        },
+        {
+          "info": {
+            "name": "Reboot the device",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=Reboot&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reboots the camera or NVR device."
+        },
+        {
+          "info": {
+            "name": "Get device name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetDevName&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the configured name of the device."
+        },
+        {
+          "info": {
+            "name": "Set device name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetDevName&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures the name of the device."
+        },
+        {
+          "info": {
+            "name": "Get automatic maintenance settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetAutoMaint&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves automatic maintenance and reboot scheduling settings."
+        },
+        {
+          "info": {
+            "name": "Get auto upgrade settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetAutoUpgrade&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves automatic firmware upgrade configuration."
+        },
+        {
+          "info": {
+            "name": "Get channel status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetChannelStatus&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the status of all camera channels including online/offline state."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Security",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get user information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetUser&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves user account information and management settings."
+        },
+        {
+          "info": {
+            "name": "Get online users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetOnline&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the list of currently connected users."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Network",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get network port configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetNetPort&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves network port settings including HTTP, HTTPS, RTSP, and ONVIF ports."
+        },
+        {
+          "info": {
+            "name": "Set network port configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetNetPort&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures network port settings."
+        },
+        {
+          "info": {
+            "name": "Get local network link settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetLocalLink&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves local network link configuration including IP address and DNS."
+        },
+        {
+          "info": {
+            "name": "Get WiFi configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetWifi&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves wireless network configuration settings."
+        },
+        {
+          "info": {
+            "name": "Get DDNS settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetDdns&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves Dynamic DNS configuration."
+        },
+        {
+          "info": {
+            "name": "Get NTP settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetNtp&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves Network Time Protocol configuration."
+        },
+        {
+          "info": {
+            "name": "Get email notification settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetEmail&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves email notification configuration for alerts."
+        },
+        {
+          "info": {
+            "name": "Get FTP upload settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetFtp&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves FTP server configuration for recording and snapshot uploads."
+        },
+        {
+          "info": {
+            "name": "Get push notification settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetPush&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves push notification configuration."
+        },
+        {
+          "info": {
+            "name": "Get UPnP settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetUpnp&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves Universal Plug and Play network configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Video",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get image settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetImage&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves image quality settings including brightness, contrast, and saturation."
+        },
+        {
+          "info": {
+            "name": "Set image settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetImage&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures image quality settings including brightness, contrast, and saturation."
+        },
+        {
+          "info": {
+            "name": "Get on-screen display settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetOsd&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves on-screen display (OSD) overlay settings for video channels."
+        },
+        {
+          "info": {
+            "name": "Set on-screen display settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetOsd&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures on-screen display overlay text and position."
+        },
+        {
+          "info": {
+            "name": "Get ISP settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetIsp&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves image signal processor settings for video quality tuning."
+        },
+        {
+          "info": {
+            "name": "Get privacy mask settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetMask&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves privacy mask overlay configuration for obscuring areas of the video."
+        },
+        {
+          "info": {
+            "name": "Set privacy mask settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetMask&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures privacy mask overlay regions on the video."
+        },
+        {
+          "info": {
+            "name": "Capture snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=Snap&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Captures a JPEG snapshot image from the specified camera channel."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Encoding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get encoding settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetEnc&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves video encoding parameters including resolution, bitrate, and frame rate."
+        },
+        {
+          "info": {
+            "name": "Set encoding settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetEnc&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures video encoding parameters including resolution, bitrate, and frame rate."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Recording",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get recording settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetRec&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves recording schedule and configuration parameters."
+        },
+        {
+          "info": {
+            "name": "Set recording settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetRec&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures recording schedule and parameters."
+        },
+        {
+          "info": {
+            "name": "Search recordings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=Search&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for recordings by date, time range, and channel."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PTZ",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Control PTZ movement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=PtzCtrl&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Controls pan, tilt, and zoom movements of PTZ-capable cameras. Supported operations include directional movement (Up, Down, Left, Right), zoom (ZoomInc, ZoomDec), focus (FocusInc, FocusDec), preset navigation (ToPos), and Stop."
+        },
+        {
+          "info": {
+            "name": "Get PTZ presets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetPtzPreset&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the list of configured PTZ preset positions."
+        },
+        {
+          "info": {
+            "name": "Set PTZ preset position",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetPtzPreset&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Saves the current PTZ position as a named preset."
+        },
+        {
+          "info": {
+            "name": "Get PTZ patrol settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetPtzPatrol&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves PTZ patrol route configuration."
+        },
+        {
+          "info": {
+            "name": "Set PTZ patrol configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetPtzPatrol&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures PTZ patrol routes and timing."
+        },
+        {
+          "info": {
+            "name": "Calibrate PTZ",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=PtzCheck&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates PTZ calibration to reset the pan-tilt-zoom mechanism."
+        },
+        {
+          "info": {
+            "name": "Get PTZ calibration status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetPtzCheckState&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the current state of PTZ calibration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Alarm",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get motion detection alarm settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetMdAlarm&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves motion detection alarm configuration including sensitivity and zones."
+        },
+        {
+          "info": {
+            "name": "Set motion detection alarm settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetMdAlarm&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures motion detection alarm sensitivity, zones, and schedules."
+        },
+        {
+          "info": {
+            "name": "Get alarm detection area",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetAlarmArea&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the configured alarm detection area zones."
+        },
+        {
+          "info": {
+            "name": "Set alarm detection area",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetAlarmArea&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures alarm detection area zones."
+        },
+        {
+          "info": {
+            "name": "Get audio alarm settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetAudioAlarm&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves audio detection alarm configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get AI detection alarm settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetAiAlarm&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves AI-powered detection alarm settings including person, vehicle, and animal detection configurations."
+        },
+        {
+          "info": {
+            "name": "Set AI detection alarm settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetAiAlarm&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures AI-powered object detection alarm parameters."
+        },
+        {
+          "info": {
+            "name": "Get AI detection state",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetAiState&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the current state of AI-powered object detection including person, vehicle, and animal detection status."
+        },
+        {
+          "info": {
+            "name": "Get AI configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetAiCfg&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves AI detection configuration and sensitivity settings."
+        },
+        {
+          "info": {
+            "name": "Set AI configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetAiCfg&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures AI detection parameters and sensitivity thresholds."
+        },
+        {
+          "info": {
+            "name": "Get autofocus settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetAutoFocus&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves autofocus configuration."
+        },
+        {
+          "info": {
+            "name": "Get auto-tracking settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetAutoTrack&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves AI auto-tracking configuration for PTZ cameras."
+        },
+        {
+          "info": {
+            "name": "Set auto-tracking settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetAutoTrack&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures AI auto-tracking behavior for PTZ cameras."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "LED",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set infrared light settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetIrLights&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures infrared LED illumination settings for night vision, including auto, on, and off modes."
+        },
+        {
+          "info": {
+            "name": "Get infrared light settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetIrLights&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the current infrared LED illumination configuration."
+        },
+        {
+          "info": {
+            "name": "Get power LED settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetPowerLed&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the power indicator LED configuration."
+        },
+        {
+          "info": {
+            "name": "Set power LED settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetPowerLed&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures the power indicator LED behavior."
+        },
+        {
+          "info": {
+            "name": "Get white light LED settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetWhiteLed&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves white spotlight LED configuration for color night vision."
+        },
+        {
+          "info": {
+            "name": "Set white light LED settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetWhiteLed&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures white spotlight LED for color night vision."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

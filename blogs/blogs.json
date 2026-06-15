@@ -2,13 +2,6 @@
   "repo": "reolink",
   "feeds": [
     {
-      "source": "https://reolink.com/feed/",
-      "feed_url": "https://reolink.com/feed/",
-      "title": "",
-      "saved": 0,
-      "method": "feed"
-    },
-    {
       "source": "https://reolink.com/blog/",
       "feed_url": "https://reolink.com/blog/",
       "title": "",
@@ -16,6 +9,6 @@
       "method": "none"
     }
   ],
-  "post_count": 19,
-  "fetched": "2026-06-01T23:35:02Z"
+  "post_count": 27,
+  "fetched": "2026-06-14T20:42:17Z"
 }

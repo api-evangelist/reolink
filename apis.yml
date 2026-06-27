@@ -66,9 +66,9 @@ apis:
       - url: vocabulary/reolink-vocabulary.yml
         type: Vocabulary
       - url: examples/reolink-login-example.json
-        type: Example
+        type: Examples
       - url: examples/reolink-ptz-control-example.json
-        type: Example
+        type: Examples
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/reolink-technology
@@ -78,7 +78,7 @@ common:
     description: Reolink security camera manufacturer homepage
   - url: https://community.reolink.com/
     name: Reolink Community Forum
-    type: Forum
+    type: Forums
     description: Community discussion and API documentation
   - url: https://support.reolink.com/
     name: Reolink Support

@@ -3,12 +3,12 @@
   "feeds": [
     {
       "source": "https://reolink.com/blog/",
-      "feed_url": "https://reolink.com/blog/",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "feed_url": "",
+      "saved": 8,
+      "method": "agent-scrape"
     }
   ],
-  "post_count": 27,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 43,
+  "fetched": "2026-06-27T13:05:39Z",
+  "agent_pulled": "2026-06-27"
 }

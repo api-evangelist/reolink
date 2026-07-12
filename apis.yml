@@ -70,6 +70,10 @@ apis:
       - url: examples/reolink-ptz-control-example.json
         type: Examples
 common:
+  - type: DomainSecurity
+    url: security/reolink-domain-security.yml
+  - type: Authentication
+    url: authentication/reolink-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/reolink-technology
   - url: https://reolink.com

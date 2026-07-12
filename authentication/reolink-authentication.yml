@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/reolink-camera-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: tokenAuth
+  type: apiKey
+  in: query
+  parameter: token
+  description: Authentication token obtained from the Login command. Pass as a query parameter
+    on all requests after authentication.
+  sources:
+  - openapi/reolink-camera-api-openapi.yml

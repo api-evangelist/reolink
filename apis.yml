@@ -70,6 +70,8 @@ apis:
       - url: examples/reolink-ptz-control-example.json
         type: Examples
 common:
+  - type: AgenticAccess
+    url: agentic-access/reolink-agentic-access.yml
   - type: DomainSecurity
     url: security/reolink-domain-security.yml
   - type: Authentication

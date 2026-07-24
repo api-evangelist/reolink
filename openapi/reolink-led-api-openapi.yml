@@ -1,0 +1,229 @@
+openapi: 3.0.3
+info:
+  title: Reolink Camera HTTP AI LED API
+  description: The Reolink Camera HTTP API provides a RESTful interface for controlling and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST requests to the /cgi-bin/api.cgi endpoint with JSON payloads. The API supports authentication via token-based sessions, device information retrieval, network configuration, video and image settings, encoding parameters, recording management, PTZ (pan-tilt-zoom) control, alarm and motion detection configuration, IR and LED light control, AI-powered object detection, and live streaming URL generation. Authentication is performed by first calling the Login command to obtain a session token, which is then passed as a query parameter on subsequent requests.
+  version: '8.0'
+  contact:
+    name: Reolink
+    url: https://reolink.com
+  license:
+    name: Proprietary
+    url: https://reolink.com
+servers:
+- url: https://{camera_ip}
+  description: Reolink Camera or NVR
+  variables:
+    camera_ip:
+      default: 192.168.1.100
+      description: IP address of the Reolink camera or NVR
+security:
+- tokenAuth: []
+tags:
+- name: LED
+  description: Infrared, white light, and power indicator LED control
+paths:
+  /cgi-bin/api.cgi?cmd=SetIrLights&token={token}:
+    post:
+      operationId: setIrLights
+      summary: Set infrared light settings
+      description: Configures infrared LED illumination settings for night vision, including auto, on, and off modes.
+      tags:
+      - LED
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: IR light settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetIrLights&token={token}:
+    post:
+      operationId: getIrLights
+      summary: Get infrared light settings
+      description: Retrieves the current infrared LED illumination configuration.
+      tags:
+      - LED
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: IR light settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetPowerLed&token={token}:
+    post:
+      operationId: getPowerLed
+      summary: Get power LED settings
+      description: Retrieves the power indicator LED configuration.
+      tags:
+      - LED
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Power LED settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetPowerLed&token={token}:
+    post:
+      operationId: setPowerLed
+      summary: Set power LED settings
+      description: Configures the power indicator LED behavior.
+      tags:
+      - LED
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Power LED settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetWhiteLed&token={token}:
+    post:
+      operationId: getWhiteLed
+      summary: Get white light LED settings
+      description: Retrieves white spotlight LED configuration for color night vision.
+      tags:
+      - LED
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: White LED settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetWhiteLed&token={token}:
+    post:
+      operationId: setWhiteLed
+      summary: Set white light LED settings
+      description: Configures white spotlight LED for color night vision.
+      tags:
+      - LED
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: White LED settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+components:
+  schemas:
+    ChannelRequest:
+      type: object
+      required:
+      - cmd
+      - action
+      - param
+      properties:
+        cmd:
+          type: string
+          description: The API command name
+        action:
+          type: integer
+          description: Action type (0 for get)
+        param:
+          type: object
+          required:
+          - channel
+          properties:
+            channel:
+              type: integer
+              description: Camera channel number (starting from 0)
+    CommandRequest:
+      type: object
+      required:
+      - cmd
+      - action
+      properties:
+        cmd:
+          type: string
+          description: The API command name
+        action:
+          type: integer
+          description: Action type (0 for get, 1 for set)
+        param:
+          type: object
+          description: Command-specific parameters
+    CommandResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+          description: The command that was executed
+        code:
+          type: integer
+          description: Response code (0 for success)
+        value:
+          type: object
+          description: Command-specific response data
+        error:
+          type: object
+          properties:
+            rspCode:
+              type: integer
+              description: Error response code
+            detail:
+              type: string
+              description: Error detail message
+  parameters:
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Authentication token obtained from the Login command
+      schema:
+        type: string
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: query
+      name: token
+      description: Authentication token obtained from the Login command. Pass as a query parameter on all requests after authentication.

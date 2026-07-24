@@ -1,0 +1,274 @@
+openapi: 3.0.3
+info:
+  title: Reolink Camera HTTP AI Video API
+  description: The Reolink Camera HTTP API provides a RESTful interface for controlling and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST requests to the /cgi-bin/api.cgi endpoint with JSON payloads. The API supports authentication via token-based sessions, device information retrieval, network configuration, video and image settings, encoding parameters, recording management, PTZ (pan-tilt-zoom) control, alarm and motion detection configuration, IR and LED light control, AI-powered object detection, and live streaming URL generation. Authentication is performed by first calling the Login command to obtain a session token, which is then passed as a query parameter on subsequent requests.
+  version: '8.0'
+  contact:
+    name: Reolink
+    url: https://reolink.com
+  license:
+    name: Proprietary
+    url: https://reolink.com
+servers:
+- url: https://{camera_ip}
+  description: Reolink Camera or NVR
+  variables:
+    camera_ip:
+      default: 192.168.1.100
+      description: IP address of the Reolink camera or NVR
+security:
+- tokenAuth: []
+tags:
+- name: Video
+  description: Image quality, OSD, ISP settings, privacy masks, and snapshot capture
+paths:
+  /cgi-bin/api.cgi?cmd=GetImage&token={token}:
+    post:
+      operationId: getImage
+      summary: Get image settings
+      description: Retrieves image quality settings including brightness, contrast, and saturation.
+      tags:
+      - Video
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Image settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetImage&token={token}:
+    post:
+      operationId: setImage
+      summary: Set image settings
+      description: Configures image quality settings including brightness, contrast, and saturation.
+      tags:
+      - Video
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Image settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetOsd&token={token}:
+    post:
+      operationId: getOsd
+      summary: Get on-screen display settings
+      description: Retrieves on-screen display (OSD) overlay settings for video channels.
+      tags:
+      - Video
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: OSD settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetOsd&token={token}:
+    post:
+      operationId: setOsd
+      summary: Set on-screen display settings
+      description: Configures on-screen display overlay text and position.
+      tags:
+      - Video
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: OSD settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetIsp&token={token}:
+    post:
+      operationId: getIsp
+      summary: Get ISP settings
+      description: Retrieves image signal processor settings for video quality tuning.
+      tags:
+      - Video
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: ISP settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetMask&token={token}:
+    post:
+      operationId: getMask
+      summary: Get privacy mask settings
+      description: Retrieves privacy mask overlay configuration for obscuring areas of the video.
+      tags:
+      - Video
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Privacy mask settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetMask&token={token}:
+    post:
+      operationId: setMask
+      summary: Set privacy mask settings
+      description: Configures privacy mask overlay regions on the video.
+      tags:
+      - Video
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Privacy mask settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=Snap&token={token}:
+    post:
+      operationId: snap
+      summary: Capture snapshot
+      description: Captures a JPEG snapshot image from the specified camera channel.
+      tags:
+      - Video
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Snapshot captured
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    ChannelRequest:
+      type: object
+      required:
+      - cmd
+      - action
+      - param
+      properties:
+        cmd:
+          type: string
+          description: The API command name
+        action:
+          type: integer
+          description: Action type (0 for get)
+        param:
+          type: object
+          required:
+          - channel
+          properties:
+            channel:
+              type: integer
+              description: Camera channel number (starting from 0)
+    CommandRequest:
+      type: object
+      required:
+      - cmd
+      - action
+      properties:
+        cmd:
+          type: string
+          description: The API command name
+        action:
+          type: integer
+          description: Action type (0 for get, 1 for set)
+        param:
+          type: object
+          description: Command-specific parameters
+    CommandResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+          description: The command that was executed
+        code:
+          type: integer
+          description: Response code (0 for success)
+        value:
+          type: object
+          description: Command-specific response data
+        error:
+          type: object
+          properties:
+            rspCode:
+              type: integer
+              description: Error response code
+            detail:
+              type: string
+              description: Error detail message
+  parameters:
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Authentication token obtained from the Login command
+      schema:
+        type: string
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: query
+      name: token
+      description: Authentication token obtained from the Login command. Pass as a query parameter on all requests after authentication.

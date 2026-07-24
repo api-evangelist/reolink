@@ -1,0 +1,389 @@
+openapi: 3.0.3
+info:
+  title: Reolink Camera HTTP AI System API
+  description: The Reolink Camera HTTP API provides a RESTful interface for controlling and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST requests to the /cgi-bin/api.cgi endpoint with JSON payloads. The API supports authentication via token-based sessions, device information retrieval, network configuration, video and image settings, encoding parameters, recording management, PTZ (pan-tilt-zoom) control, alarm and motion detection configuration, IR and LED light control, AI-powered object detection, and live streaming URL generation. Authentication is performed by first calling the Login command to obtain a session token, which is then passed as a query parameter on subsequent requests.
+  version: '8.0'
+  contact:
+    name: Reolink
+    url: https://reolink.com
+  license:
+    name: Proprietary
+    url: https://reolink.com
+servers:
+- url: https://{camera_ip}
+  description: Reolink Camera or NVR
+  variables:
+    camera_ip:
+      default: 192.168.1.100
+      description: IP address of the Reolink camera or NVR
+security:
+- tokenAuth: []
+tags:
+- name: System
+  description: Device information, maintenance, time settings, firmware, and storage
+paths:
+  /cgi-bin/api.cgi?cmd=GetDevInfo&token={token}:
+    post:
+      operationId: getDevInfo
+      summary: Get device information
+      description: Retrieves device information including model, hardware version, firmware version, device name, and channel count.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Device information retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevInfoResponse'
+  /cgi-bin/api.cgi?cmd=GetAbility&token={token}:
+    post:
+      operationId: getAbility
+      summary: Get user abilities and permissions
+      description: Retrieves the abilities and permissions available to the authenticated user.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: User abilities retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetTime&token={token}:
+    post:
+      operationId: getTime
+      summary: Get device time
+      description: Retrieves the current date and time settings of the device.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Time settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetTime&token={token}:
+    post:
+      operationId: setTime
+      summary: Set device time
+      description: Configures the date and time settings of the device.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Time settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetHddInfo&token={token}:
+    post:
+      operationId: getHddInfo
+      summary: Get storage information
+      description: Retrieves hard disk drive information including capacity and status.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: HDD information retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=FormatHdd&token={token}:
+    post:
+      operationId: formatHdd
+      summary: Format storage drive
+      description: Formats the hard disk drive on the device, erasing all recordings.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: HDD formatted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=Reboot&token={token}:
+    post:
+      operationId: reboot
+      summary: Reboot the device
+      description: Reboots the camera or NVR device.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Device rebooting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetDevName&token={token}:
+    post:
+      operationId: getDevName
+      summary: Get device name
+      description: Retrieves the configured name of the device.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Device name retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetDevName&token={token}:
+    post:
+      operationId: setDevName
+      summary: Set device name
+      description: Configures the name of the device.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Device name updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAutoMaint&token={token}:
+    post:
+      operationId: getAutoMaint
+      summary: Get automatic maintenance settings
+      description: Retrieves automatic maintenance and reboot scheduling settings.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Auto maintenance settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAutoUpgrade&token={token}:
+    post:
+      operationId: getAutoUpgrade
+      summary: Get auto upgrade settings
+      description: Retrieves automatic firmware upgrade configuration.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Auto upgrade settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetChannelStatus&token={token}:
+    post:
+      operationId: getChannelStatus
+      summary: Get channel status
+      description: Retrieves the status of all camera channels including online/offline state.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Channel status retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+components:
+  schemas:
+    DevInfoResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+        code:
+          type: integer
+        value:
+          type: object
+          properties:
+            DevInfo:
+              type: object
+              properties:
+                B485:
+                  type: integer
+                IOInputNum:
+                  type: integer
+                IOOutputNum:
+                  type: integer
+                audioNum:
+                  type: integer
+                buildDay:
+                  type: string
+                cfgVer:
+                  type: string
+                channelNum:
+                  type: integer
+                detail:
+                  type: string
+                diskNum:
+                  type: integer
+                firmVer:
+                  type: string
+                frameworkVer:
+                  type: integer
+                hardVer:
+                  type: string
+                model:
+                  type: string
+                name:
+                  type: string
+                pakSuffix:
+                  type: string
+                serial:
+                  type: string
+                type:
+                  type: string
+                wifi:
+                  type: integer
+    CommandRequest:
+      type: object
+      required:
+      - cmd
+      - action
+      properties:
+        cmd:
+          type: string
+          description: The API command name
+        action:
+          type: integer
+          description: Action type (0 for get, 1 for set)
+        param:
+          type: object
+          description: Command-specific parameters
+    CommandResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+          description: The command that was executed
+        code:
+          type: integer
+          description: Response code (0 for success)
+        value:
+          type: object
+          description: Command-specific response data
+        error:
+          type: object
+          properties:
+            rspCode:
+              type: integer
+              description: Error response code
+            detail:
+              type: string
+              description: Error detail message
+  parameters:
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Authentication token obtained from the Login command
+      schema:
+        type: string
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: query
+      name: token
+      description: Authentication token obtained from the Login command. Pass as a query parameter on all requests after authentication.

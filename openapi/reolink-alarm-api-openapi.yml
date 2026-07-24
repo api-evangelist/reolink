@@ -1,0 +1,251 @@
+openapi: 3.0.3
+info:
+  title: Reolink Camera HTTP AI Alarm API
+  description: The Reolink Camera HTTP API provides a RESTful interface for controlling and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST requests to the /cgi-bin/api.cgi endpoint with JSON payloads. The API supports authentication via token-based sessions, device information retrieval, network configuration, video and image settings, encoding parameters, recording management, PTZ (pan-tilt-zoom) control, alarm and motion detection configuration, IR and LED light control, AI-powered object detection, and live streaming URL generation. Authentication is performed by first calling the Login command to obtain a session token, which is then passed as a query parameter on subsequent requests.
+  version: '8.0'
+  contact:
+    name: Reolink
+    url: https://reolink.com
+  license:
+    name: Proprietary
+    url: https://reolink.com
+servers:
+- url: https://{camera_ip}
+  description: Reolink Camera or NVR
+  variables:
+    camera_ip:
+      default: 192.168.1.100
+      description: IP address of the Reolink camera or NVR
+security:
+- tokenAuth: []
+tags:
+- name: Alarm
+  description: Motion detection, audio alarms, and detection zone configuration
+paths:
+  /cgi-bin/api.cgi?cmd=GetMdAlarm&token={token}:
+    post:
+      operationId: getMdAlarm
+      summary: Get motion detection alarm settings
+      description: Retrieves motion detection alarm configuration including sensitivity and zones.
+      tags:
+      - Alarm
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Motion detection settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetMdAlarm&token={token}:
+    post:
+      operationId: setMdAlarm
+      summary: Set motion detection alarm settings
+      description: Configures motion detection alarm sensitivity, zones, and schedules.
+      tags:
+      - Alarm
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Motion detection settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAiAlarm&token={token}:
+    post:
+      operationId: getAiAlarm
+      summary: Get AI detection alarm settings
+      description: Retrieves AI-powered detection alarm settings including person, vehicle, and animal detection configurations.
+      tags:
+      - Alarm
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: AI alarm settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetAiAlarm&token={token}:
+    post:
+      operationId: setAiAlarm
+      summary: Set AI detection alarm settings
+      description: Configures AI-powered object detection alarm parameters.
+      tags:
+      - Alarm
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: AI alarm settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAlarmArea&token={token}:
+    post:
+      operationId: getAlarmArea
+      summary: Get alarm detection area
+      description: Retrieves the configured alarm detection area zones.
+      tags:
+      - Alarm
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Alarm area settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=SetAlarmArea&token={token}:
+    post:
+      operationId: setAlarmArea
+      summary: Set alarm detection area
+      description: Configures alarm detection area zones.
+      tags:
+      - Alarm
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Alarm area settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /cgi-bin/api.cgi?cmd=GetAudioAlarm&token={token}:
+    post:
+      operationId: getAudioAlarm
+      summary: Get audio alarm settings
+      description: Retrieves audio detection alarm configuration.
+      tags:
+      - Alarm
+      parameters:
+      - $ref: '#/components/parameters/Token'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelRequest'
+      responses:
+        '200':
+          description: Audio alarm settings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+components:
+  schemas:
+    ChannelRequest:
+      type: object
+      required:
+      - cmd
+      - action
+      - param
+      properties:
+        cmd:
+          type: string
+          description: The API command name
+        action:
+          type: integer
+          description: Action type (0 for get)
+        param:
+          type: object
+          required:
+          - channel
+          properties:
+            channel:
+              type: integer
+              description: Camera channel number (starting from 0)
+    CommandRequest:
+      type: object
+      required:
+      - cmd
+      - action
+      properties:
+        cmd:
+          type: string
+          description: The API command name
+        action:
+          type: integer
+          description: Action type (0 for get, 1 for set)
+        param:
+          type: object
+          description: Command-specific parameters
+    CommandResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+          description: The command that was executed
+        code:
+          type: integer
+          description: Response code (0 for success)
+        value:
+          type: object
+          description: Command-specific response data
+        error:
+          type: object
+          properties:
+            rspCode:
+              type: integer
+              description: Error response code
+            detail:
+              type: string
+              description: Error detail message
+  parameters:
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Authentication token obtained from the Login command
+      schema:
+        type: string
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: query
+      name: token
+      description: Authentication token obtained from the Login command. Pass as a query parameter on all requests after authentication.

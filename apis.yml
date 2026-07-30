@@ -7,7 +7,20 @@ description: >-
   object detection, network configuration, LED control, and user authentication. The API is accessible on the local
   network via the device IP address.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/reolink.png
 tags:
   - IoT
   - Security Cameras
@@ -19,56 +32,479 @@ created: '2025-01-01'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: reolink:camera-http-api
-    name: Reolink Camera HTTP API
-    description: >-
-      The Reolink Camera HTTP API provides a JSON-based interface for controlling and configuring Reolink IP cameras and
-      NVRs. All commands are sent as HTTP POST requests to the /cgi-bin/api.cgi endpoint. The API covers 11 functional
-      modules including authentication, system management, security, network configuration, video and image settings,
-      encoding, recording and playback, PTZ control, alarm and motion detection, LED control, and AI-powered object
-      detection with auto-tracking.
-    humanURL: https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
-    tags:
-      - IoT
-      - Security Cameras
-      - Surveillance
-      - Smart Home
-      - AI Detection
-    properties:
-      - url: https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
-        type: Documentation
-      - url: openapi/reolink-camera-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/device-info.json
-        type: JSONSchema
-      - url: json-schema/command-request.json
-        type: JSONSchema
-      - url: json-schema/command-response.json
-        type: JSONSchema
-      - url: json-schema/login.json
-        type: JSONSchema
-      - url: json-schema/ptz-control.json
-        type: JSONSchema
-      - url: json-schema/recording-search.json
-        type: JSONSchema
-      - url: json-schema/alarm-settings.json
-        type: JSONSchema
-      - url: json-schema/network-settings.json
-        type: JSONSchema
-      - url: json-ld/reolink-context.jsonld
-        type: JSONLD
-      - url: rules/reolink-rules.yml
-        type: Rules
-      - url: capabilities/camera-management.yaml
-        type: Capabilities
-      - url: json-structure/reolink-device-structure.json
-        type: JSONStructure
-      - url: vocabulary/reolink-vocabulary.yml
-        type: Vocabulary
-      - url: examples/reolink-login-example.json
-        type: Examples
-      - url: examples/reolink-ptz-control-example.json
-        type: Examples
+- aid: reolink:reolink-ai-api
+  name: Reolink AI API
+  description: AI-powered object detection, auto-tracking, and autofocus
+  humanURL: >-
+    https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  tags:
+  - AI
+  properties:
+  - type: OpenAPI
+    url: openapi/reolink-ai-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  - type: JSONSchema
+    url: json-schema/device-info.json
+  - type: JSONSchema
+    url: json-schema/command-request.json
+  - type: JSONSchema
+    url: json-schema/command-response.json
+  - type: JSONSchema
+    url: json-schema/login.json
+  - type: JSONSchema
+    url: json-schema/ptz-control.json
+  - type: JSONSchema
+    url: json-schema/recording-search.json
+  - type: JSONSchema
+    url: json-schema/alarm-settings.json
+  - type: JSONSchema
+    url: json-schema/network-settings.json
+  - type: JSONLD
+    url: json-ld/reolink-context.jsonld
+  - type: Rules
+    url: rules/reolink-rules.yml
+  - type: Capabilities
+    url: capabilities/camera-management.yaml
+  - type: JSONStructure
+    url: json-structure/reolink-device-structure.json
+  - type: Vocabulary
+    url: vocabulary/reolink-vocabulary.yml
+  - type: Examples
+    url: examples/reolink-login-example.json
+  - type: Examples
+    url: examples/reolink-ptz-control-example.json
+- aid: reolink:reolink-alarm-api
+  name: Reolink Alarm API
+  description: Motion detection, audio alarms, and detection zone configuration
+  humanURL: >-
+    https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  tags:
+  - Alarm
+  properties:
+  - type: OpenAPI
+    url: openapi/reolink-alarm-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  - type: JSONSchema
+    url: json-schema/device-info.json
+  - type: JSONSchema
+    url: json-schema/command-request.json
+  - type: JSONSchema
+    url: json-schema/command-response.json
+  - type: JSONSchema
+    url: json-schema/login.json
+  - type: JSONSchema
+    url: json-schema/ptz-control.json
+  - type: JSONSchema
+    url: json-schema/recording-search.json
+  - type: JSONSchema
+    url: json-schema/alarm-settings.json
+  - type: JSONSchema
+    url: json-schema/network-settings.json
+  - type: JSONLD
+    url: json-ld/reolink-context.jsonld
+  - type: Rules
+    url: rules/reolink-rules.yml
+  - type: Capabilities
+    url: capabilities/camera-management.yaml
+  - type: JSONStructure
+    url: json-structure/reolink-device-structure.json
+  - type: Vocabulary
+    url: vocabulary/reolink-vocabulary.yml
+  - type: Examples
+    url: examples/reolink-login-example.json
+  - type: Examples
+    url: examples/reolink-ptz-control-example.json
+- aid: reolink:reolink-authentication-api
+  name: Reolink Authentication API
+  description: Login, logout, and session token management
+  humanURL: >-
+    https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/reolink-authentication-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  - type: JSONSchema
+    url: json-schema/device-info.json
+  - type: JSONSchema
+    url: json-schema/command-request.json
+  - type: JSONSchema
+    url: json-schema/command-response.json
+  - type: JSONSchema
+    url: json-schema/login.json
+  - type: JSONSchema
+    url: json-schema/ptz-control.json
+  - type: JSONSchema
+    url: json-schema/recording-search.json
+  - type: JSONSchema
+    url: json-schema/alarm-settings.json
+  - type: JSONSchema
+    url: json-schema/network-settings.json
+  - type: JSONLD
+    url: json-ld/reolink-context.jsonld
+  - type: Rules
+    url: rules/reolink-rules.yml
+  - type: Capabilities
+    url: capabilities/camera-management.yaml
+  - type: JSONStructure
+    url: json-structure/reolink-device-structure.json
+  - type: Vocabulary
+    url: vocabulary/reolink-vocabulary.yml
+  - type: Examples
+    url: examples/reolink-login-example.json
+  - type: Examples
+    url: examples/reolink-ptz-control-example.json
+- aid: reolink:reolink-encoding-api
+  name: Reolink Encoding API
+  description: Video stream encoding parameters and compression settings
+  humanURL: >-
+    https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  tags:
+  - Encoding
+  properties:
+  - type: OpenAPI
+    url: openapi/reolink-encoding-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  - type: JSONSchema
+    url: json-schema/device-info.json
+  - type: JSONSchema
+    url: json-schema/command-request.json
+  - type: JSONSchema
+    url: json-schema/command-response.json
+  - type: JSONSchema
+    url: json-schema/login.json
+  - type: JSONSchema
+    url: json-schema/ptz-control.json
+  - type: JSONSchema
+    url: json-schema/recording-search.json
+  - type: JSONSchema
+    url: json-schema/alarm-settings.json
+  - type: JSONSchema
+    url: json-schema/network-settings.json
+  - type: JSONLD
+    url: json-ld/reolink-context.jsonld
+  - type: Rules
+    url: rules/reolink-rules.yml
+  - type: Capabilities
+    url: capabilities/camera-management.yaml
+  - type: JSONStructure
+    url: json-structure/reolink-device-structure.json
+  - type: Vocabulary
+    url: vocabulary/reolink-vocabulary.yml
+  - type: Examples
+    url: examples/reolink-login-example.json
+  - type: Examples
+    url: examples/reolink-ptz-control-example.json
+- aid: reolink:reolink-led-api
+  name: Reolink LED API
+  description: Infrared, white light, and power indicator LED control
+  humanURL: >-
+    https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  tags:
+  - LED
+  properties:
+  - type: OpenAPI
+    url: openapi/reolink-led-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  - type: JSONSchema
+    url: json-schema/device-info.json
+  - type: JSONSchema
+    url: json-schema/command-request.json
+  - type: JSONSchema
+    url: json-schema/command-response.json
+  - type: JSONSchema
+    url: json-schema/login.json
+  - type: JSONSchema
+    url: json-schema/ptz-control.json
+  - type: JSONSchema
+    url: json-schema/recording-search.json
+  - type: JSONSchema
+    url: json-schema/alarm-settings.json
+  - type: JSONSchema
+    url: json-schema/network-settings.json
+  - type: JSONLD
+    url: json-ld/reolink-context.jsonld
+  - type: Rules
+    url: rules/reolink-rules.yml
+  - type: Capabilities
+    url: capabilities/camera-management.yaml
+  - type: JSONStructure
+    url: json-structure/reolink-device-structure.json
+  - type: Vocabulary
+    url: vocabulary/reolink-vocabulary.yml
+  - type: Examples
+    url: examples/reolink-login-example.json
+  - type: Examples
+    url: examples/reolink-ptz-control-example.json
+- aid: reolink:reolink-network-api
+  name: Reolink Network API
+  description: Network configuration, WiFi, DDNS, NTP, email, FTP, and push notifications
+  humanURL: >-
+    https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  tags:
+  - Network
+  properties:
+  - type: OpenAPI
+    url: openapi/reolink-network-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  - type: JSONSchema
+    url: json-schema/device-info.json
+  - type: JSONSchema
+    url: json-schema/command-request.json
+  - type: JSONSchema
+    url: json-schema/command-response.json
+  - type: JSONSchema
+    url: json-schema/login.json
+  - type: JSONSchema
+    url: json-schema/ptz-control.json
+  - type: JSONSchema
+    url: json-schema/recording-search.json
+  - type: JSONSchema
+    url: json-schema/alarm-settings.json
+  - type: JSONSchema
+    url: json-schema/network-settings.json
+  - type: JSONLD
+    url: json-ld/reolink-context.jsonld
+  - type: Rules
+    url: rules/reolink-rules.yml
+  - type: Capabilities
+    url: capabilities/camera-management.yaml
+  - type: JSONStructure
+    url: json-structure/reolink-device-structure.json
+  - type: Vocabulary
+    url: vocabulary/reolink-vocabulary.yml
+  - type: Examples
+    url: examples/reolink-login-example.json
+  - type: Examples
+    url: examples/reolink-ptz-control-example.json
+- aid: reolink:reolink-ptz-api
+  name: Reolink PTZ API
+  description: Pan-tilt-zoom control, presets, patrols, and calibration
+  humanURL: >-
+    https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  tags:
+  - PTZ
+  properties:
+  - type: OpenAPI
+    url: openapi/reolink-ptz-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  - type: JSONSchema
+    url: json-schema/device-info.json
+  - type: JSONSchema
+    url: json-schema/command-request.json
+  - type: JSONSchema
+    url: json-schema/command-response.json
+  - type: JSONSchema
+    url: json-schema/login.json
+  - type: JSONSchema
+    url: json-schema/ptz-control.json
+  - type: JSONSchema
+    url: json-schema/recording-search.json
+  - type: JSONSchema
+    url: json-schema/alarm-settings.json
+  - type: JSONSchema
+    url: json-schema/network-settings.json
+  - type: JSONLD
+    url: json-ld/reolink-context.jsonld
+  - type: Rules
+    url: rules/reolink-rules.yml
+  - type: Capabilities
+    url: capabilities/camera-management.yaml
+  - type: JSONStructure
+    url: json-structure/reolink-device-structure.json
+  - type: Vocabulary
+    url: vocabulary/reolink-vocabulary.yml
+  - type: Examples
+    url: examples/reolink-login-example.json
+  - type: Examples
+    url: examples/reolink-ptz-control-example.json
+- aid: reolink:reolink-recording-api
+  name: Reolink Recording API
+  description: Recording schedules, search, and playback
+  humanURL: >-
+    https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  tags:
+  - Recording
+  properties:
+  - type: OpenAPI
+    url: openapi/reolink-recording-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  - type: JSONSchema
+    url: json-schema/device-info.json
+  - type: JSONSchema
+    url: json-schema/command-request.json
+  - type: JSONSchema
+    url: json-schema/command-response.json
+  - type: JSONSchema
+    url: json-schema/login.json
+  - type: JSONSchema
+    url: json-schema/ptz-control.json
+  - type: JSONSchema
+    url: json-schema/recording-search.json
+  - type: JSONSchema
+    url: json-schema/alarm-settings.json
+  - type: JSONSchema
+    url: json-schema/network-settings.json
+  - type: JSONLD
+    url: json-ld/reolink-context.jsonld
+  - type: Rules
+    url: rules/reolink-rules.yml
+  - type: Capabilities
+    url: capabilities/camera-management.yaml
+  - type: JSONStructure
+    url: json-structure/reolink-device-structure.json
+  - type: Vocabulary
+    url: vocabulary/reolink-vocabulary.yml
+  - type: Examples
+    url: examples/reolink-login-example.json
+  - type: Examples
+    url: examples/reolink-ptz-control-example.json
+- aid: reolink:reolink-security-api
+  name: Reolink Security API
+  description: User management and access control
+  humanURL: >-
+    https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  tags:
+  - Security
+  properties:
+  - type: OpenAPI
+    url: openapi/reolink-security-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  - type: JSONSchema
+    url: json-schema/device-info.json
+  - type: JSONSchema
+    url: json-schema/command-request.json
+  - type: JSONSchema
+    url: json-schema/command-response.json
+  - type: JSONSchema
+    url: json-schema/login.json
+  - type: JSONSchema
+    url: json-schema/ptz-control.json
+  - type: JSONSchema
+    url: json-schema/recording-search.json
+  - type: JSONSchema
+    url: json-schema/alarm-settings.json
+  - type: JSONSchema
+    url: json-schema/network-settings.json
+  - type: JSONLD
+    url: json-ld/reolink-context.jsonld
+  - type: Rules
+    url: rules/reolink-rules.yml
+  - type: Capabilities
+    url: capabilities/camera-management.yaml
+  - type: JSONStructure
+    url: json-structure/reolink-device-structure.json
+  - type: Vocabulary
+    url: vocabulary/reolink-vocabulary.yml
+  - type: Examples
+    url: examples/reolink-login-example.json
+  - type: Examples
+    url: examples/reolink-ptz-control-example.json
+- aid: reolink:reolink-system-api
+  name: Reolink System API
+  description: Device information, maintenance, time settings, firmware, and storage
+  humanURL: >-
+    https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  tags:
+  - System
+  properties:
+  - type: OpenAPI
+    url: openapi/reolink-system-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  - type: JSONSchema
+    url: json-schema/device-info.json
+  - type: JSONSchema
+    url: json-schema/command-request.json
+  - type: JSONSchema
+    url: json-schema/command-response.json
+  - type: JSONSchema
+    url: json-schema/login.json
+  - type: JSONSchema
+    url: json-schema/ptz-control.json
+  - type: JSONSchema
+    url: json-schema/recording-search.json
+  - type: JSONSchema
+    url: json-schema/alarm-settings.json
+  - type: JSONSchema
+    url: json-schema/network-settings.json
+  - type: JSONLD
+    url: json-ld/reolink-context.jsonld
+  - type: Rules
+    url: rules/reolink-rules.yml
+  - type: Capabilities
+    url: capabilities/camera-management.yaml
+  - type: JSONStructure
+    url: json-structure/reolink-device-structure.json
+  - type: Vocabulary
+    url: vocabulary/reolink-vocabulary.yml
+  - type: Examples
+    url: examples/reolink-login-example.json
+  - type: Examples
+    url: examples/reolink-ptz-control-example.json
+- aid: reolink:reolink-video-api
+  name: Reolink Video API
+  description: Image quality, OSD, ISP settings, privacy masks, and snapshot capture
+  humanURL: >-
+    https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  tags:
+  - Video
+  properties:
+  - type: OpenAPI
+    url: openapi/reolink-video-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
+  - type: JSONSchema
+    url: json-schema/device-info.json
+  - type: JSONSchema
+    url: json-schema/command-request.json
+  - type: JSONSchema
+    url: json-schema/command-response.json
+  - type: JSONSchema
+    url: json-schema/login.json
+  - type: JSONSchema
+    url: json-schema/ptz-control.json
+  - type: JSONSchema
+    url: json-schema/recording-search.json
+  - type: JSONSchema
+    url: json-schema/alarm-settings.json
+  - type: JSONSchema
+    url: json-schema/network-settings.json
+  - type: JSONLD
+    url: json-ld/reolink-context.jsonld
+  - type: Rules
+    url: rules/reolink-rules.yml
+  - type: Capabilities
+    url: capabilities/camera-management.yaml
+  - type: JSONStructure
+    url: json-structure/reolink-device-structure.json
+  - type: Vocabulary
+    url: vocabulary/reolink-vocabulary.yml
+  - type: Examples
+    url: examples/reolink-login-example.json
+  - type: Examples
+    url: examples/reolink-ptz-control-example.json
 common:
   - type: AgenticAccess
     url: agentic-access/reolink-agentic-access.yml

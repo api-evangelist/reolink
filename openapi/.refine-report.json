@@ -1,0 +1,34 @@
+{
+  "provider": "reolink",
+  "sources": [
+    "reolink-ai-api-openapi.yml",
+    "reolink-alarm-api-openapi.yml",
+    "reolink-authentication-api-openapi.yml",
+    "reolink-encoding-api-openapi.yml",
+    "reolink-led-api-openapi.yml",
+    "reolink-network-api-openapi.yml",
+    "reolink-ptz-api-openapi.yml",
+    "reolink-recording-api-openapi.yml",
+    "reolink-security-api-openapi.yml",
+    "reolink-system-api-openapi.yml",
+    "reolink-video-api-openapi.yml"
+  ],
+  "outputs": [
+    "reolink-ai-api-openapi.yml",
+    "reolink-alarm-api-openapi.yml",
+    "reolink-authentication-api-openapi.yml",
+    "reolink-encoding-api-openapi.yml",
+    "reolink-led-api-openapi.yml",
+    "reolink-network-api-openapi.yml",
+    "reolink-ptz-api-openapi.yml",
+    "reolink-recording-api-openapi.yml",
+    "reolink-security-api-openapi.yml",
+    "reolink-system-api-openapi.yml",
+    "reolink-video-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -65,8 +65,6 @@ apis:
     url: json-ld/reolink-context.jsonld
   - type: Rules
     url: rules/reolink-rules.yml
-  - type: Capabilities
-    url: capabilities/camera-management.yaml
   - type: JSONStructure
     url: json-structure/reolink-device-structure.json
   - type: Vocabulary
@@ -108,8 +106,6 @@ apis:
     url: json-ld/reolink-context.jsonld
   - type: Rules
     url: rules/reolink-rules.yml
-  - type: Capabilities
-    url: capabilities/camera-management.yaml
   - type: JSONStructure
     url: json-structure/reolink-device-structure.json
   - type: Vocabulary
@@ -151,8 +147,6 @@ apis:
     url: json-ld/reolink-context.jsonld
   - type: Rules
     url: rules/reolink-rules.yml
-  - type: Capabilities
-    url: capabilities/camera-management.yaml
   - type: JSONStructure
     url: json-structure/reolink-device-structure.json
   - type: Vocabulary
@@ -194,8 +188,6 @@ apis:
     url: json-ld/reolink-context.jsonld
   - type: Rules
     url: rules/reolink-rules.yml
-  - type: Capabilities
-    url: capabilities/camera-management.yaml
   - type: JSONStructure
     url: json-structure/reolink-device-structure.json
   - type: Vocabulary
@@ -237,8 +229,6 @@ apis:
     url: json-ld/reolink-context.jsonld
   - type: Rules
     url: rules/reolink-rules.yml
-  - type: Capabilities
-    url: capabilities/camera-management.yaml
   - type: JSONStructure
     url: json-structure/reolink-device-structure.json
   - type: Vocabulary
@@ -280,8 +270,6 @@ apis:
     url: json-ld/reolink-context.jsonld
   - type: Rules
     url: rules/reolink-rules.yml
-  - type: Capabilities
-    url: capabilities/camera-management.yaml
   - type: JSONStructure
     url: json-structure/reolink-device-structure.json
   - type: Vocabulary
@@ -323,8 +311,6 @@ apis:
     url: json-ld/reolink-context.jsonld
   - type: Rules
     url: rules/reolink-rules.yml
-  - type: Capabilities
-    url: capabilities/camera-management.yaml
   - type: JSONStructure
     url: json-structure/reolink-device-structure.json
   - type: Vocabulary
@@ -366,8 +352,6 @@ apis:
     url: json-ld/reolink-context.jsonld
   - type: Rules
     url: rules/reolink-rules.yml
-  - type: Capabilities
-    url: capabilities/camera-management.yaml
   - type: JSONStructure
     url: json-structure/reolink-device-structure.json
   - type: Vocabulary
@@ -409,8 +393,6 @@ apis:
     url: json-ld/reolink-context.jsonld
   - type: Rules
     url: rules/reolink-rules.yml
-  - type: Capabilities
-    url: capabilities/camera-management.yaml
   - type: JSONStructure
     url: json-structure/reolink-device-structure.json
   - type: Vocabulary
@@ -452,8 +434,6 @@ apis:
     url: json-ld/reolink-context.jsonld
   - type: Rules
     url: rules/reolink-rules.yml
-  - type: Capabilities
-    url: capabilities/camera-management.yaml
   - type: JSONStructure
     url: json-structure/reolink-device-structure.json
   - type: Vocabulary
@@ -495,8 +475,6 @@ apis:
     url: json-ld/reolink-context.jsonld
   - type: Rules
     url: rules/reolink-rules.yml
-  - type: Capabilities
-    url: capabilities/camera-management.yaml
   - type: JSONStructure
     url: json-structure/reolink-device-structure.json
   - type: Vocabulary

@@ -30,7 +30,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/reolink/refs/heads/main/apis.yml
 created: '2025-01-01'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: reolink:reolink-ai-api
   name: Reolink AI API

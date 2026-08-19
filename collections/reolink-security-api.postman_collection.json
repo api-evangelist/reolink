@@ -1,0 +1,310 @@
+{
+  "item": [
+    {
+      "id": "76827294-afbb-46b1-988e-e088917c83cd",
+      "name": "Security",
+      "description": {
+        "content": "User management and access control",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c1babf34-4f18-4752-9652-4e82a8c33f40",
+          "name": "Get user information",
+          "request": {
+            "name": "Get user information",
+            "description": {
+              "content": "Retrieves user account information and management settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "GetUser"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f25f2497-ed8e-49f4-83ff-9a6e0386b912",
+              "name": "User information retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 4128,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 41,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5ecc873-a768-4cbb-b7d5-61aeb0b53e68",
+          "name": "Get online users",
+          "request": {
+            "name": "Get online users",
+            "description": {
+              "content": "Retrieves the list of currently connected users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "GetOnline"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "16c99e1b-b48a-4413-8840-4afcff478ba4",
+              "name": "Online users retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 4128,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 41,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "IP address of the Reolink camera or NVR",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "192.168.1.100",
+      "key": "camera_ip"
+    },
+    {
+      "type": "string",
+      "value": "https://{{camera_ip}}",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Authentication token obtained from the Login command",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "token"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "08e071c4-9517-42a1-8121-f67bacac62e3",
+    "name": "Reolink Camera HTTP AI Security API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Reolink Camera HTTP API provides a RESTful interface for controlling and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST requests to the /cgi-bin/api.cgi endpoint with JSON payloads. The API supports authentication via token-based sessions, device information retrieval, network configuration, video and image settings, encoding parameters, recording management, PTZ (pan-tilt-zoom) control, alarm and motion detection configuration, IR and LED light control, AI-powered object detection, and live streaming URL generation. Authentication is performed by first calling the Login command to obtain a session token, which is then passed as a query parameter on subsequent requests.\n\nContact Support:\n Name: Reolink",
+      "type": "text/plain"
+    }
+  }
+}

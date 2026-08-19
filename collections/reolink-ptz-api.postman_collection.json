@@ -1,0 +1,1157 @@
+{
+  "item": [
+    {
+      "id": "5fa27d24-4c45-4d36-b38d-1107d26448f7",
+      "name": "PTZ",
+      "description": {
+        "content": "Pan-tilt-zoom control, presets, patrols, and calibration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1863f0c0-cb23-431b-84ad-63dc44d76e4c",
+          "name": "Control PTZ movement",
+          "request": {
+            "name": "Control PTZ movement",
+            "description": {
+              "content": "Controls pan, tilt, and zoom movements of PTZ-capable cameras. Supported operations include directional movement (Up, Down, Left, Right), zoom (ZoomInc, ZoomDec), focus (FocusInc, FocusDec), preset navigation (ToPos), and Stop.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "PtzCtrl"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\",\n    \"op\": \"<string>\",\n    \"speed\": \"<integer>\",\n    \"id\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "87f31529-5352-4424-b61a-6cfcefd565fb",
+              "name": "PTZ command executed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\",\n    \"op\": \"<string>\",\n    \"speed\": \"<integer>\",\n    \"id\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 1634,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 8090,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69bf1ee3-18e4-4358-a039-124c3e95e949",
+          "name": "Get PTZ presets",
+          "request": {
+            "name": "Get PTZ presets",
+            "description": {
+              "content": "Retrieves the list of configured PTZ preset positions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "GetPtzPreset"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6f83fcc2-874e-499a-b3ac-c23b75e33a38",
+              "name": "PTZ presets retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 1634,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 8090,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75151ad0-e537-4321-aa0e-d94a75525be5",
+          "name": "Set PTZ preset position",
+          "request": {
+            "name": "Set PTZ preset position",
+            "description": {
+              "content": "Saves the current PTZ position as a named preset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "SetPtzPreset"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "364edf9c-8b80-4efa-b570-ee42c9c606d6",
+              "name": "PTZ preset saved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 1634,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 8090,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "134168ea-fc68-4bf9-ba0a-0f15cf8b4f0a",
+          "name": "Get PTZ patrol settings",
+          "request": {
+            "name": "Get PTZ patrol settings",
+            "description": {
+              "content": "Retrieves PTZ patrol route configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "GetPtzPatrol"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "40043f20-bb1f-4414-b971-74b917e6459e",
+              "name": "PTZ patrol settings retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 1634,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 8090,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90a6ab3a-2628-43a9-9e80-0c501d272b7f",
+          "name": "Set PTZ patrol configuration",
+          "request": {
+            "name": "Set PTZ patrol configuration",
+            "description": {
+              "content": "Configures PTZ patrol routes and timing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "SetPtzPatrol"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a95d1353-58a5-4b13-a1b5-f494995e8312",
+              "name": "PTZ patrol settings updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 1634,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 8090,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a47ff178-e85b-4438-b034-727029c06340",
+          "name": "Calibrate PTZ",
+          "request": {
+            "name": "Calibrate PTZ",
+            "description": {
+              "content": "Initiates PTZ calibration to reset the pan-tilt-zoom mechanism.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "PtzCheck"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "935f900a-7a97-4c1c-86f1-249c73b50ec3",
+              "name": "PTZ calibration started",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 1634,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 8090,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d7bc09f-6585-43a5-9a0b-dba31026e869",
+          "name": "Get PTZ calibration status",
+          "request": {
+            "name": "Get PTZ calibration status",
+            "description": {
+              "content": "Retrieves the current state of PTZ calibration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "GetPtzCheckState"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "01707518-6132-4803-afa5-a36161009369",
+              "name": "PTZ calibration state retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 1634,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 8090,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b42a63b7-75eb-4c16-a2e9-8fde5543186d",
+          "name": "Get auto-tracking settings",
+          "request": {
+            "name": "Get auto-tracking settings",
+            "description": {
+              "content": "Retrieves AI auto-tracking configuration for PTZ cameras.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "GetAutoTrack"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef96155d-2e08-482b-ba39-7c5aa85bf5d8",
+              "name": "Auto-tracking settings retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 1634,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 8090,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce41d091-bc4a-4183-8af6-3acf127852e6",
+          "name": "Set auto-tracking settings",
+          "request": {
+            "name": "Set auto-tracking settings",
+            "description": {
+              "content": "Configures AI auto-tracking behavior for PTZ cameras.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "SetAutoTrack"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4af0f38e-50eb-4ade-bb21-ef5f2168223a",
+              "name": "Auto-tracking settings updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 1634,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 8090,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "IP address of the Reolink camera or NVR",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "192.168.1.100",
+      "key": "camera_ip"
+    },
+    {
+      "type": "string",
+      "value": "https://{{camera_ip}}",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Authentication token obtained from the Login command",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "token"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f1c90a6a-cd61-4cee-9f9b-4a14186660ce",
+    "name": "Reolink Camera HTTP AI PTZ API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Reolink Camera HTTP API provides a RESTful interface for controlling and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST requests to the /cgi-bin/api.cgi endpoint with JSON payloads. The API supports authentication via token-based sessions, device information retrieval, network configuration, video and image settings, encoding parameters, recording management, PTZ (pan-tilt-zoom) control, alarm and motion detection configuration, IR and LED light control, AI-powered object detection, and live streaming URL generation. Authentication is performed by first calling the Login command to obtain a session token, which is then passed as a query parameter on subsequent requests.\n\nContact Support:\n Name: Reolink",
+      "type": "text/plain"
+    }
+  }
+}

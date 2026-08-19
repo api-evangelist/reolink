@@ -1,0 +1,1036 @@
+{
+  "item": [
+    {
+      "id": "274c9015-54b2-422e-bb36-1e4c94844397",
+      "name": "AI",
+      "description": {
+        "content": "AI-powered object detection, auto-tracking, and autofocus",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d8db8be-791d-413e-afde-de9205ff5407",
+          "name": "Get AI detection alarm settings",
+          "request": {
+            "name": "Get AI detection alarm settings",
+            "description": {
+              "content": "Retrieves AI-powered detection alarm settings including person, vehicle, and animal detection configurations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "GetAiAlarm"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a9113473-aab8-4274-a994-93a664d4b1f6",
+              "name": "AI alarm settings retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 9858,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 433,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65856080-15f2-4945-ba60-3e7b5dad04b2",
+          "name": "Set AI detection alarm settings",
+          "request": {
+            "name": "Set AI detection alarm settings",
+            "description": {
+              "content": "Configures AI-powered object detection alarm parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "SetAiAlarm"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e69cbd1a-d9d6-4dfc-b066-e592f5241a18",
+              "name": "AI alarm settings updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 9858,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 433,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d0268a6-89d8-4c56-bd68-42f3ac38df11",
+          "name": "Get AI detection state",
+          "request": {
+            "name": "Get AI detection state",
+            "description": {
+              "content": "Retrieves the current state of AI-powered object detection including person, vehicle, and animal detection status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "GetAiState"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "563e63c5-4d77-4010-b39a-2150aef5ca4e",
+              "name": "AI detection state retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 9858,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 433,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b04a59ee-f8b1-4f3f-9b0a-3b86ee17d8ea",
+          "name": "Get AI configuration",
+          "request": {
+            "name": "Get AI configuration",
+            "description": {
+              "content": "Retrieves AI detection configuration and sensitivity settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "GetAiCfg"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1adc8b61-9f5d-4a02-855d-084839fd8568",
+              "name": "AI configuration retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 9858,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 433,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd91b4d7-c2cc-446d-9c16-5550366f8e27",
+          "name": "Set AI configuration",
+          "request": {
+            "name": "Set AI configuration",
+            "description": {
+              "content": "Configures AI detection parameters and sensitivity thresholds.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "SetAiCfg"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "71b71071-ebe4-4fcd-a90f-3e8c153c9bfa",
+              "name": "AI configuration updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 9858,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 433,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "946ea0b2-f135-4749-9006-83a632a036ff",
+          "name": "Get autofocus settings",
+          "request": {
+            "name": "Get autofocus settings",
+            "description": {
+              "content": "Retrieves autofocus configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "GetAutoFocus"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5a839070-1ee9-4618-86b4-8847e5b52fea",
+              "name": "Autofocus settings retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 9858,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 433,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7f306f3-15a8-4331-871d-9f801abe542f",
+          "name": "Get auto-tracking settings",
+          "request": {
+            "name": "Get auto-tracking settings",
+            "description": {
+              "content": "Retrieves AI auto-tracking configuration for PTZ cameras.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "GetAutoTrack"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "71690d21-a307-4133-98c1-6407c19f0b76",
+              "name": "Auto-tracking settings retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": {\n    \"channel\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 9858,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 433,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b1e8026-de66-43d0-b90c-8c783ebdb84c",
+          "name": "Set auto-tracking settings",
+          "request": {
+            "name": "Set auto-tracking settings",
+            "description": {
+              "content": "Configures AI auto-tracking behavior for PTZ cameras.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "SetAutoTrack"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fff8485d-1c1d-40f9-be18-e7335b138062",
+              "name": "Auto-tracking settings updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 9858,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 433,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "IP address of the Reolink camera or NVR",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "192.168.1.100",
+      "key": "camera_ip"
+    },
+    {
+      "type": "string",
+      "value": "https://{{camera_ip}}",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Authentication token obtained from the Login command",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "token"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "efbdc787-e40b-4e9f-96c8-75d4587e4c36",
+    "name": "Reolink Camera HTTP AI API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Reolink Camera HTTP API provides a RESTful interface for controlling and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST requests to the /cgi-bin/api.cgi endpoint with JSON payloads. The API supports authentication via token-based sessions, device information retrieval, network configuration, video and image settings, encoding parameters, recording management, PTZ (pan-tilt-zoom) control, alarm and motion detection configuration, IR and LED light control, AI-powered object detection, and live streaming URL generation. Authentication is performed by first calling the Login command to obtain a session token, which is then passed as a query parameter on subsequent requests.\n\nContact Support:\n Name: Reolink",
+      "type": "text/plain"
+    }
+  }
+}

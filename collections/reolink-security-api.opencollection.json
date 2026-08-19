@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reolink Camera HTTP AI Security API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Security",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get user information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetUser&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves user account information and management settings."
+        },
+        {
+          "info": {
+            "name": "Get online users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetOnline&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the list of currently connected users."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,301 @@
+{
+  "item": [
+    {
+      "id": "5291a39b-1e19-472f-aa65-7f8b5fe8bdb1",
+      "name": "Authentication",
+      "description": {
+        "content": "Login, logout, and session token management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "91b46d80-12e0-4a71-a425-f34a8d21675d",
+          "name": "Authenticate and obtain session token",
+          "request": {
+            "name": "Authenticate and obtain session token",
+            "description": {
+              "content": "Authenticates a user with the camera and returns a session token for use in subsequent API requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"cmd\": \"<string>\",\n    \"action\": \"<integer>\",\n    \"param\": {\n      \"User\": {\n        \"userName\": \"<string>\",\n        \"password\": \"<string>\"\n      }\n    }\n  },\n  {\n    \"cmd\": \"<string>\",\n    \"action\": \"<integer>\",\n    \"param\": {\n      \"User\": {\n        \"userName\": \"<string>\",\n        \"password\": \"<string>\"\n      }\n    }\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b0075d7a-689b-42ff-af60-3084c3b9d547",
+              "name": "Successful authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"cmd\": \"<string>\",\n    \"action\": \"<integer>\",\n    \"param\": {\n      \"User\": {\n        \"userName\": \"<string>\",\n        \"password\": \"<string>\"\n      }\n    }\n  },\n  {\n    \"cmd\": \"<string>\",\n    \"action\": \"<integer>\",\n    \"param\": {\n      \"User\": {\n        \"userName\": \"<string>\",\n        \"password\": \"<string>\"\n      }\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"cmd\": \"string\",\n    \"code\": 9403,\n    \"value\": {\n      \"Token\": {\n        \"leaseTime\": 8420,\n        \"name\": \"string\"\n      }\n    }\n  },\n  {\n    \"cmd\": \"string\",\n    \"code\": 599,\n    \"value\": {\n      \"Token\": {\n        \"leaseTime\": 3709,\n        \"name\": \"string\"\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6037cc20-5fbe-4a3e-bd13-300aee3d27dc",
+          "name": "End session and invalidate token",
+          "request": {
+            "name": "End session and invalidate token",
+            "description": {
+              "content": "Logs out the current session and invalidates the authentication token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cgi-bin",
+                "api.cgi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cmd",
+                  "value": "Logout"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "IP address of the Reolink camera or NVR",
+                  "type": "any",
+                  "value": "{{camera_ip}}",
+                  "key": "camera_ip"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a05b6ceb-3821-4a83-9a62-325b4b9857dd",
+              "name": "Successful logout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cgi-bin",
+                    "api.cgi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "IP address of the Reolink camera or NVR",
+                      "type": "any",
+                      "value": "{{camera_ip}}",
+                      "key": "camera_ip"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cmd\": \"<string>\",\n  \"action\": \"<integer>\",\n  \"param\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cmd\": \"string\",\n  \"code\": 9022,\n  \"value\": {},\n  \"error\": {\n    \"rspCode\": 7494,\n    \"detail\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "IP address of the Reolink camera or NVR",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "192.168.1.100",
+      "key": "camera_ip"
+    },
+    {
+      "type": "string",
+      "value": "https://{{camera_ip}}",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Authentication token obtained from the Login command",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "token"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8286be0e-1442-44dc-9032-ca815862384b",
+    "name": "Reolink Camera HTTP AI Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Reolink Camera HTTP API provides a RESTful interface for controlling and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST requests to the /cgi-bin/api.cgi endpoint with JSON payloads. The API supports authentication via token-based sessions, device information retrieval, network configuration, video and image settings, encoding parameters, recording management, PTZ (pan-tilt-zoom) control, alarm and motion detection configuration, IR and LED light control, AI-powered object detection, and live streaming URL generation. Authentication is performed by first calling the Login command to obtain a session token, which is then passed as a query parameter on subsequent requests.\n\nContact Support:\n Name: Reolink",
+      "type": "text/plain"
+    }
+  }
+}

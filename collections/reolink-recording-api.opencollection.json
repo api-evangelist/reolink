@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reolink Camera HTTP AI Recording API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recording",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get recording settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetRec&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves recording schedule and configuration parameters."
+        },
+        {
+          "info": {
+            "name": "Set recording settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetRec&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures recording schedule and parameters."
+        },
+        {
+          "info": {
+            "name": "Search recordings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=Search&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for recordings by date, time range, and channel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

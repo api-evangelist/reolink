@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reolink Camera HTTP AI LED API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LED",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set infrared light settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetIrLights&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures infrared LED illumination settings for night vision, including auto, on, and off modes."
+        },
+        {
+          "info": {
+            "name": "Get infrared light settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetIrLights&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the current infrared LED illumination configuration."
+        },
+        {
+          "info": {
+            "name": "Get power LED settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetPowerLed&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the power indicator LED configuration."
+        },
+        {
+          "info": {
+            "name": "Set power LED settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetPowerLed&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures the power indicator LED behavior."
+        },
+        {
+          "info": {
+            "name": "Get white light LED settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetWhiteLed&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves white spotlight LED configuration for color night vision."
+        },
+        {
+          "info": {
+            "name": "Set white light LED settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetWhiteLed&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures white spotlight LED for color night vision."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

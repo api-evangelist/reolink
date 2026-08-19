@@ -1,0 +1,210 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reolink Camera HTTP AI Video API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Video",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get image settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetImage&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves image quality settings including brightness, contrast, and saturation."
+        },
+        {
+          "info": {
+            "name": "Set image settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetImage&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures image quality settings including brightness, contrast, and saturation."
+        },
+        {
+          "info": {
+            "name": "Get on-screen display settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetOsd&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves on-screen display (OSD) overlay settings for video channels."
+        },
+        {
+          "info": {
+            "name": "Set on-screen display settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetOsd&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures on-screen display overlay text and position."
+        },
+        {
+          "info": {
+            "name": "Get ISP settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetIsp&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves image signal processor settings for video quality tuning."
+        },
+        {
+          "info": {
+            "name": "Get privacy mask settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=GetMask&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves privacy mask overlay configuration for obscuring areas of the video."
+        },
+        {
+          "info": {
+            "name": "Set privacy mask settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=SetMask&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures privacy mask overlay regions on the video."
+        },
+        {
+          "info": {
+            "name": "Capture snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{camera_ip}/cgi-bin/api.cgi?cmd=Snap&token=:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Authentication token obtained from the Login command"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Captures a JPEG snapshot image from the specified camera channel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

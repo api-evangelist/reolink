@@ -38,6 +38,8 @@ apis:
   humanURL: >-
     https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023
   tags:
+  - Artificial Intelligence
+  tags_raw:
   - AI
   properties:
   - type: OpenAPI

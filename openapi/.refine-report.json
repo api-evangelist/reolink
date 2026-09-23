@@ -1,17 +1,7 @@
 {
   "provider": "reolink",
   "sources": [
-    "reolink-ai-api-openapi.yml",
-    "reolink-alarm-api-openapi.yml",
-    "reolink-authentication-api-openapi.yml",
-    "reolink-encoding-api-openapi.yml",
-    "reolink-led-api-openapi.yml",
-    "reolink-network-api-openapi.yml",
-    "reolink-ptz-api-openapi.yml",
-    "reolink-recording-api-openapi.yml",
-    "reolink-security-api-openapi.yml",
-    "reolink-system-api-openapi.yml",
-    "reolink-video-api-openapi.yml"
+    "_original/reolink-camera-api-openapi.yml"
   ],
   "outputs": [
     "reolink-ai-api-openapi.yml",
@@ -29,6 +19,22 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "reolink-camera-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "reolink-ai-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reolink-alarm-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reolink-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reolink-encoding-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reolink-led-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reolink-network-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reolink-ptz-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reolink-recording-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reolink-security-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reolink-system-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reolink-video-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

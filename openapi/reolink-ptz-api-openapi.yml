@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Reolink Camera HTTP AI PTZ API
-  description: The Reolink Camera HTTP API provides a RESTful interface for controlling and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST requests to the /cgi-bin/api.cgi endpoint with JSON payloads. The API supports authentication via token-based sessions, device information retrieval, network configuration, video and image settings, encoding parameters, recording management, PTZ (pan-tilt-zoom) control, alarm and motion detection configuration, IR and LED light control, AI-powered object detection, and live streaming URL generation. Authentication is performed by first calling the Login command to obtain a session token, which is then passed as a query parameter on subsequent requests.
+  title: Reolink Camera HTTP PTZ API
+  description: The Reolink Camera HTTP API provides a RESTful interface for controlling and configuring Reolink IP cameras and NVRs.
   version: '8.0'
   contact:
     name: Reolink
@@ -221,57 +221,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/CommandResponse'
 components:
-  parameters:
-    Token:
-      name: token
-      in: path
-      required: true
-      description: Authentication token obtained from the Login command
-      schema:
-        type: string
   schemas:
-    CommandResponse:
-      type: object
-      properties:
-        cmd:
-          type: string
-          description: The command that was executed
-        code:
-          type: integer
-          description: Response code (0 for success)
-        value:
-          type: object
-          description: Command-specific response data
-        error:
-          type: object
-          properties:
-            rspCode:
-              type: integer
-              description: Error response code
-            detail:
-              type: string
-              description: Error detail message
-    ChannelRequest:
+    CommandRequest:
       type: object
       required:
       - cmd
       - action
-      - param
       properties:
         cmd:
           type: string
           description: The API command name
         action:
           type: integer
-          description: Action type (0 for get)
+          description: Action type (0 for get, 1 for set)
         param:
           type: object
-          required:
-          - channel
-          properties:
-            channel:
-              type: integer
-              description: Camera channel number (starting from 0)
+          description: Command-specific parameters
     PtzCtrlRequest:
       type: object
       required:
@@ -323,21 +288,56 @@ components:
             id:
               type: integer
               description: Preset ID for ToPos operation
-    CommandRequest:
+    CommandResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+          description: The command that was executed
+        code:
+          type: integer
+          description: Response code (0 for success)
+        value:
+          type: object
+          description: Command-specific response data
+        error:
+          type: object
+          properties:
+            rspCode:
+              type: integer
+              description: Error response code
+            detail:
+              type: string
+              description: Error detail message
+    ChannelRequest:
       type: object
       required:
       - cmd
       - action
+      - param
       properties:
         cmd:
           type: string
           description: The API command name
         action:
           type: integer
-          description: Action type (0 for get, 1 for set)
+          description: Action type (0 for get)
         param:
           type: object
-          description: Command-specific parameters
+          required:
+          - channel
+          properties:
+            channel:
+              type: integer
+              description: Camera channel number (starting from 0)
+  parameters:
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Authentication token obtained from the Login command
+      schema:
+        type: string
   securitySchemes:
     tokenAuth:
       type: apiKey

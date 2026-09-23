@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Reolink Camera HTTP AI Recording API
-  description: The Reolink Camera HTTP API provides a RESTful interface for controlling and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST requests to the /cgi-bin/api.cgi endpoint with JSON payloads. The API supports authentication via token-based sessions, device information retrieval, network configuration, video and image settings, encoding parameters, recording management, PTZ (pan-tilt-zoom) control, alarm and motion detection configuration, IR and LED light control, AI-powered object detection, and live streaming URL generation. Authentication is performed by first calling the Login command to obtain a session token, which is then passed as a query parameter on subsequent requests.
+  title: Reolink Camera HTTP Recording API
+  description: The Reolink Camera HTTP API provides a RESTful interface for controlling and configuring Reolink IP cameras and NVRs.
   version: '8.0'
   contact:
     name: Reolink
@@ -90,33 +90,6 @@ paths:
                 $ref: '#/components/schemas/SearchResponse'
 components:
   schemas:
-    SearchResponse:
-      type: object
-      properties:
-        cmd:
-          type: string
-        code:
-          type: integer
-        value:
-          type: object
-          properties:
-            SearchResult:
-              type: object
-              properties:
-                channel:
-                  type: integer
-                Status:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      year:
-                        type: integer
-                      mon:
-                        type: integer
-                      table:
-                        type: string
-                        description: Bitmask of days with recordings
     CommandRequest:
       type: object
       required:
@@ -174,6 +147,33 @@ components:
             channel:
               type: integer
               description: Camera channel number (starting from 0)
+    SearchResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+        code:
+          type: integer
+        value:
+          type: object
+          properties:
+            SearchResult:
+              type: object
+              properties:
+                channel:
+                  type: integer
+                Status:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      year:
+                        type: integer
+                      mon:
+                        type: integer
+                      table:
+                        type: string
+                        description: Bitmask of days with recordings
     SearchRequest:
       type: object
       required:

@@ -222,21 +222,6 @@ paths:
                 $ref: '#/components/schemas/CommandResponse'
 components:
   schemas:
-    CommandRequest:
-      type: object
-      required:
-      - cmd
-      - action
-      properties:
-        cmd:
-          type: string
-          description: The API command name
-        action:
-          type: integer
-          description: Action type (0 for get, 1 for set)
-        param:
-          type: object
-          description: Command-specific parameters
     PtzCtrlRequest:
       type: object
       required:
@@ -309,6 +294,21 @@ components:
             detail:
               type: string
               description: Error detail message
+    CommandRequest:
+      type: object
+      required:
+      - cmd
+      - action
+      properties:
+        cmd:
+          type: string
+          description: The API command name
+        action:
+          type: integer
+          description: Action type (0 for get, 1 for set)
+        param:
+          type: object
+          description: Command-specific parameters
     ChannelRequest:
       type: object
       required:

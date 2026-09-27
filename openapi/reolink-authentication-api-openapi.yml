@@ -70,21 +70,6 @@ paths:
                 $ref: '#/components/schemas/CommandResponse'
 components:
   schemas:
-    CommandRequest:
-      type: object
-      required:
-      - cmd
-      - action
-      properties:
-        cmd:
-          type: string
-          description: The API command name
-        action:
-          type: integer
-          description: Action type (0 for get, 1 for set)
-        param:
-          type: object
-          description: Command-specific parameters
     CommandResponse:
       type: object
       properties:
@@ -106,25 +91,21 @@ components:
             detail:
               type: string
               description: Error detail message
-    LoginResponse:
+    CommandRequest:
       type: object
+      required:
+      - cmd
+      - action
       properties:
         cmd:
           type: string
-        code:
+          description: The API command name
+        action:
           type: integer
-        value:
+          description: Action type (0 for get, 1 for set)
+        param:
           type: object
-          properties:
-            Token:
-              type: object
-              properties:
-                leaseTime:
-                  type: integer
-                  description: Token validity duration in seconds
-                name:
-                  type: string
-                  description: Authentication token string
+          description: Command-specific parameters
     LoginRequest:
       type: object
       required:
@@ -157,6 +138,25 @@ components:
                 password:
                   type: string
                   description: Password for authentication
+    LoginResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+        code:
+          type: integer
+        value:
+          type: object
+          properties:
+            Token:
+              type: object
+              properties:
+                leaseTime:
+                  type: integer
+                  description: Token validity duration in seconds
+                name:
+                  type: string
+                  description: Authentication token string
   parameters:
     Token:
       name: token

@@ -67,6 +67,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/CommandResponse'
 components:
+  parameters:
+    Token:
+      name: token
+      in: path
+      required: true
+      description: Authentication token obtained from the Login command
+      schema:
+        type: string
   schemas:
     CommandResponse:
       type: object
@@ -104,14 +112,6 @@ components:
         param:
           type: object
           description: Command-specific parameters
-  parameters:
-    Token:
-      name: token
-      in: path
-      required: true
-      description: Authentication token obtained from the Login command
-      schema:
-        type: string
   securitySchemes:
     tokenAuth:
       type: apiKey

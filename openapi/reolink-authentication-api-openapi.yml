@@ -70,38 +70,6 @@ paths:
                 $ref: '#/components/schemas/CommandResponse'
 components:
   schemas:
-    LoginRequest:
-      type: object
-      required:
-      - cmd
-      - action
-      - param
-      properties:
-        cmd:
-          type: string
-          enum:
-          - Login
-        action:
-          type: integer
-          enum:
-          - 0
-        param:
-          type: object
-          required:
-          - User
-          properties:
-            User:
-              type: object
-              required:
-              - userName
-              - password
-              properties:
-                userName:
-                  type: string
-                  description: Username for authentication
-                password:
-                  type: string
-                  description: Password for authentication
     LoginResponse:
       type: object
       properties:
@@ -142,6 +110,38 @@ components:
             detail:
               type: string
               description: Error detail message
+    LoginRequest:
+      type: object
+      required:
+      - cmd
+      - action
+      - param
+      properties:
+        cmd:
+          type: string
+          enum:
+          - Login
+        action:
+          type: integer
+          enum:
+          - 0
+        param:
+          type: object
+          required:
+          - User
+          properties:
+            User:
+              type: object
+              required:
+              - userName
+              - password
+              properties:
+                userName:
+                  type: string
+                  description: Username for authentication
+                password:
+                  type: string
+                  description: Password for authentication
     CommandRequest:
       type: object
       required:

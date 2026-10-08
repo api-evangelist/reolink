@@ -500,6 +500,12 @@ apis:
   - type: Examples
     url: examples/reolink-ptz-control-example.json
 common:
+  - type: Plans
+    url: plans/reolink-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/reolink-rate-limits.yml
+  - type: FinOps
+    url: finops/reolink-finops.yml
   - type: AgenticAccess
     url: agentic-access/reolink-agentic-access.yml
   - type: DomainSecurity

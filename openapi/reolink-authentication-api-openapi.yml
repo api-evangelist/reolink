@@ -70,25 +70,6 @@ paths:
                 $ref: '#/components/schemas/CommandResponse'
 components:
   schemas:
-    LoginResponse:
-      type: object
-      properties:
-        cmd:
-          type: string
-        code:
-          type: integer
-        value:
-          type: object
-          properties:
-            Token:
-              type: object
-              properties:
-                leaseTime:
-                  type: integer
-                  description: Token validity duration in seconds
-                name:
-                  type: string
-                  description: Authentication token string
     CommandResponse:
       type: object
       properties:
@@ -110,6 +91,25 @@ components:
             detail:
               type: string
               description: Error detail message
+    LoginResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+        code:
+          type: integer
+        value:
+          type: object
+          properties:
+            Token:
+              type: object
+              properties:
+                leaseTime:
+                  type: integer
+                  description: Token validity duration in seconds
+                name:
+                  type: string
+                  description: Authentication token string
     LoginRequest:
       type: object
       required:

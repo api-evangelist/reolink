@@ -200,27 +200,6 @@ paths:
                 $ref: '#/components/schemas/CommandResponse'
 components:
   schemas:
-    ChannelRequest:
-      type: object
-      required:
-      - cmd
-      - action
-      - param
-      properties:
-        cmd:
-          type: string
-          description: The API command name
-        action:
-          type: integer
-          description: Action type (0 for get)
-        param:
-          type: object
-          required:
-          - channel
-          properties:
-            channel:
-              type: integer
-              description: Camera channel number (starting from 0)
     CommandResponse:
       type: object
       properties:
@@ -242,6 +221,27 @@ components:
             detail:
               type: string
               description: Error detail message
+    ChannelRequest:
+      type: object
+      required:
+      - cmd
+      - action
+      - param
+      properties:
+        cmd:
+          type: string
+          description: The API command name
+        action:
+          type: integer
+          description: Action type (0 for get)
+        param:
+          type: object
+          required:
+          - channel
+          properties:
+            channel:
+              type: integer
+              description: Camera channel number (starting from 0)
     CommandRequest:
       type: object
       required:

@@ -111,6 +111,54 @@ components:
             detail:
               type: string
               description: Error detail message
+    ChannelRequest:
+      type: object
+      required:
+      - cmd
+      - action
+      - param
+      properties:
+        cmd:
+          type: string
+          description: The API command name
+        action:
+          type: integer
+          description: Action type (0 for get)
+        param:
+          type: object
+          required:
+          - channel
+          properties:
+            channel:
+              type: integer
+              description: Camera channel number (starting from 0)
+    SearchResponse:
+      type: object
+      properties:
+        cmd:
+          type: string
+        code:
+          type: integer
+        value:
+          type: object
+          properties:
+            SearchResult:
+              type: object
+              properties:
+                channel:
+                  type: integer
+                Status:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      year:
+                        type: integer
+                      mon:
+                        type: integer
+                      table:
+                        type: string
+                        description: Bitmask of days with recordings
     SearchRequest:
       type: object
       required:
@@ -180,54 +228,6 @@ components:
                       type: integer
                     sec:
                       type: integer
-    ChannelRequest:
-      type: object
-      required:
-      - cmd
-      - action
-      - param
-      properties:
-        cmd:
-          type: string
-          description: The API command name
-        action:
-          type: integer
-          description: Action type (0 for get)
-        param:
-          type: object
-          required:
-          - channel
-          properties:
-            channel:
-              type: integer
-              description: Camera channel number (starting from 0)
-    SearchResponse:
-      type: object
-      properties:
-        cmd:
-          type: string
-        code:
-          type: integer
-        value:
-          type: object
-          properties:
-            SearchResult:
-              type: object
-              properties:
-                channel:
-                  type: integer
-                Status:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      year:
-                        type: integer
-                      mon:
-                        type: integer
-                      table:
-                        type: string
-                        description: Bitmask of days with recordings
     CommandRequest:
       type: object
       required:

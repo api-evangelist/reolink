@@ -1,0 +1,58 @@
+edges:
+- partner_name: ONVIF
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.onvif.org/conformant-products/
+  category: video surveillance interface conformance
+  contract_reference:
+    register: ONVIF conformant products (onvif.org/conformant-products)
+    standard: ONVIF
+    spec_file: null
+    role: onvif-conformant-member
+    registered_name: REOLINK INNOVATION LIMITED
+    register_id: onvif-company-145425
+    matched_domain: reolink.com
+    matched_by: domain
+    detected_by: sweep-onvif-video-analytics.py
+    detected: '2026-10-21'
+    certified_products:
+    - product: ONVIF Profile T
+      lapsed: false
+      roles:
+      - device
+      newest_test: '2026-07-03'
+      products_listed: 125
+    products_sample:
+    - B4K11
+    - B5M11WA
+    - CX810
+    - CX820
+    - ColorX Series P335X
+    - D4K23
+    - D4K42
+    - Duo Series P737
+    - Duo Series P750
+    - Duo Series P757
+    signal_note: certified_products = one entry per ONVIF profile the company holds a conformant product for, never
+      per product; roles, counts and test dates are context. The register carries no expiry and drops withdrawn
+      products, so lapsed is false
+    register_country: China
+  detected_by: sweep-onvif-video-analytics.py
+  first_seen: '2026-10-21'
+  partner_tier: user
+generated: '2026-10-21'
+method: searched
+source:
+- https://www.onvif.org/conformant-products/
+- https://www.onvif.org/member-tools?action=product_search
+- https://www.onvif.org/about/member-list/
+- https://www.onvif.org/member-tools/wp-admin/admin-ajax.php?action=get_companies_list
+checked:
+- https://www.onvif.org/about/member-list/
+- https://www.onvif.org/conformant-products/
+- https://www.onvif.org/member-tools/wp-admin/admin-ajax.php?action=get_companies_list
+- https://www.onvif.org/member-tools?action=product_search

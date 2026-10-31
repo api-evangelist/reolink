@@ -1,4 +1,4 @@
-# Reolink (reolink)
+# Reolink
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,73 +66,181 @@
 
 Reolink is a provider of security cameras and smart home surveillance technology. Their cameras offer an HTTP API that enables direct device control and configuration through JSON-based POST requests. The API supports comprehensive camera management including PTZ control, video encoding settings, recording search and playback, motion and AI-powered object detection, network configuration, LED control, and user authentication. The API is accessible on the local network via the device IP address.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/reolink/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/reolink/refs/heads/main/apis.yml)
+**Areas:** IoT · Security Cameras · Surveillance · Smart Home · AI Detection
 
-## Scope
+## Reolink on APIs.io
 
-- **Type:** Index
+Everything profiled for Reolink is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/reolink/](https://apis.io/providers/reolink/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (11)
 
-- IoT
-- Security Cameras
-- Surveillance
-- Smart Home
-- AI Detection
+- [Reolink AI API](https://apis.io/apis/reolink/reolink-ai-api/) — AI-powered object detection, auto-tracking, and autofocus
+- [Reolink Alarm API](https://apis.io/apis/reolink/reolink-alarm-api/) — Motion detection, audio alarms, and detection zone configuration
+- [Reolink Authentication API](https://apis.io/apis/reolink/reolink-authentication-api/) — Login, logout, and session token management
+- [Reolink Encoding API](https://apis.io/apis/reolink/reolink-encoding-api/) — Video stream encoding parameters and compression settings
+- [Reolink LED API](https://apis.io/apis/reolink/reolink-led-api/) — Infrared, white light, and power indicator LED control
+- [Reolink Network API](https://apis.io/apis/reolink/reolink-network-api/) — Network configuration, WiFi, DDNS, NTP, email, FTP, and push notifications
+- [Reolink PTZ API](https://apis.io/apis/reolink/reolink-ptz-api/) — Pan-tilt-zoom control, presets, patrols, and calibration
+- [Reolink Recording API](https://apis.io/apis/reolink/reolink-recording-api/) — Recording schedules, search, and playback
+- [Reolink Security API](https://apis.io/apis/reolink/reolink-security-api/) — User management and access control
+- [Reolink System API](https://apis.io/apis/reolink/reolink-system-api/) — Device information, maintenance, time settings, firmware, and storage
+- [Reolink Video API](https://apis.io/apis/reolink/reolink-video-api/) — Image quality, OSD, ISP settings, privacy masks, and snapshot capture
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-01-01
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Reolink Camera HTTP API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Reolink Camera HTTP API provides a JSON-based interface for controlling and configuring Reolink IP cameras and NVRs. All commands are sent as HTTP POST requests to the /cgi-bin/api.cgi endpoint. The API covers 11 functional modules including authentication, system management, security, network configuration, video and image settings, encoding, recording and playback, PTZ control, alarm and motion detection, LED control, and AI-powered object detection with auto-tracking.
+- [Reolink Agentic Access](https://apis.io/agentic-access/reolink/reolink-agentic-access/)
 
-- **Human URL:** [https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023](https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023)
+#### JSON Schema (8)
 
-#### Tags
+The data models the API reads and writes.
 
-- IoT
-- Security Cameras
-- Surveillance
-- Smart Home
-- AI Detection
+- [Reolink Alarm Settings](https://apis.io/schemas/reolink/alarm-settings/)
+- [Reolink Command Request](https://apis.io/schemas/reolink/command-request/)
+- [Reolink Command Response](https://apis.io/schemas/reolink/command-response/)
+- [Reolink Device Info](https://apis.io/schemas/reolink/device-info/)
+- [Reolink Login](https://apis.io/schemas/reolink/login/)
+- [Reolink Network Settings](https://apis.io/schemas/reolink/network-settings/)
+- [Reolink PTZ Control](https://apis.io/schemas/reolink/ptz-control/)
+- [Reolink Recording Search](https://apis.io/schemas/reolink/recording-search/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://community.reolink.com/topic/4196/reolink-camera-api-user-guide_v8-updated-in-april-2023)
-- [OpenAPI](openapi/reolink-camera-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/reolink-camera-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/reolink-camera-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/device-info.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/command-request.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/command-response.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/login.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/ptz-control.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/recording-search.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/alarm-settings.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/network-settings.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/reolink-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Rules](rules/reolink-rules.yml)
-- [Capabilities](capabilities/camera-management.yaml)
-- [JSON Structure](json-structure/reolink-device-structure.json)
-- [Vocabulary](vocabulary/reolink-vocabulary.yml)
-- [Example](examples/reolink-login-example.json)
-- [Example](examples/reolink-ptz-control-example.json)
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [Reolink Device Structure](https://apis.io/json-structure/reolink/reolink-device-structure/)
 
-- [LinkedIn](https://www.linkedin.com/company/reolink-technology)
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Reolink Context](https://apis.io/jsonld/reolink/reolink-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Reolink Vocabulary](https://apis.io/vocabularies/reolink/reolink-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Reolink Login Example](https://apis.io/examples/reolink/reolink-login-example/)
+- [Reolink Ptz Control Example](https://apis.io/examples/reolink/reolink-ptz-control-example/)
+
+#### Collections (12)
+
+Postman and Open Collection request collections.
+
+- [Reolink Camera HTTP AI API](https://apis.io/collections/reolink/open-reolink-ai-api/)
+- [Reolink Camera HTTP AI Alarm API](https://apis.io/collections/reolink/open-reolink-alarm-api/)
+- [Reolink Camera HTTP AI Authentication API](https://apis.io/collections/reolink/open-reolink-authentication-api/)
+- [Reolink Camera HTTP API](https://apis.io/collections/reolink/open-reolink-camera-api/)
+- [Reolink Camera HTTP AI Encoding API](https://apis.io/collections/reolink/open-reolink-encoding-api/)
+- [Reolink Camera HTTP AI LED API](https://apis.io/collections/reolink/open-reolink-led-api/)
+- [Reolink Camera HTTP AI Network API](https://apis.io/collections/reolink/open-reolink-network-api/)
+- [Reolink Camera HTTP AI PTZ API](https://apis.io/collections/reolink/open-reolink-ptz-api/)
+- [Reolink Camera HTTP AI Recording API](https://apis.io/collections/reolink/open-reolink-recording-api/)
+- [Reolink Camera HTTP AI Security API](https://apis.io/collections/reolink/open-reolink-security-api/)
+- [Reolink Camera HTTP AI System API](https://apis.io/collections/reolink/open-reolink-system-api/)
+- [Reolink Camera HTTP AI Video API](https://apis.io/collections/reolink/open-reolink-video-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Reolink — jsonschema rules](https://apis.io/rules/reolink/reolink-jsonschema-spectral-rules/)
+- [Reolink API Rules](https://apis.io/rules/reolink/reolink-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Reolink Authentication](https://apis.io/security/reolink/reolink-authentication/)
+- [Reolink Domain Security](https://apis.io/security/reolink/reolink-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Reolink Plans Pricing](https://apis.io/plans/reolink/reolink-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Reolink Rate Limits](https://apis.io/rate-limits/reolink/reolink-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Reolink Finops](https://apis.io/finops/reolink/reolink-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://reolink.com)
-- [Forum](https://community.reolink.com/)
 - [Support](https://support.reolink.com/)
 - [Blog](https://reolink.com/blog/)
-- [GitHub Organization](https://github.com/ReolinkCameraAPI)
+- [GitHub](https://github.com/ReolinkCameraAPI)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 32.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 57.9 |
+| Contract governance | 27.3 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 7.9 |
+
+**Agent readiness 19.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/reolink/](https://apis.io/providers/reolink/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Reolink: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/reolink/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
